@@ -1,5 +1,6 @@
 package com.example.pro_fessor
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -16,7 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.pro_fessor.ui.theme.Pro_fessorTheme
 
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -28,7 +31,7 @@ class MainActivity : ComponentActivity() {
         val profileButton = findViewById<ImageButton>(R.id.profile_button)
 
         homeButton.setOnClickListener {
-            // Home 버튼 라우팅
+            startActivity(Intent(this, ImageActivity::class.java))
         }
 
         searchButton.setOnClickListener {
