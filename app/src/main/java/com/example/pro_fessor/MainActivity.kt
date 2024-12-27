@@ -1,30 +1,36 @@
 package com.example.pro_fessor
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 
+@Suppress("DEPRECATION")
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // 하단바 동작 설정 (id값으로 들고옴)
-        val homeButton = findViewById<ImageButton>(R.id.home_button)
-        val searchButton = findViewById<ImageButton>(R.id.search_button)
-        val profileButton = findViewById<ImageButton>(R.id.profile_button)
+        val phoneButton = findViewById<ImageButton>(R.id.phone_button)
+        val imageButton = findViewById<ImageButton>(R.id.image_button)
+        val otherButton = findViewById<ImageButton>(R.id.other_button)
 
-        homeButton.setOnClickListener {
-            // Home 버튼 라우팅
+        phoneButton.setOnClickListener {
+            //phone 화면 라우팅
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
-        searchButton.setOnClickListener {
-            // Search 버튼 라우팅
+        imageButton.setOnClickListener {
+            // image 버튼 라우팅
         }
 
-        profileButton.setOnClickListener {
-            // Profile 버튼 라우팅
+        otherButton.setOnClickListener {
+            // other 버튼 라우팅
         }
     }
 }
