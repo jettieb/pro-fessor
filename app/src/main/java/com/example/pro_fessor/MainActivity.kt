@@ -2,9 +2,7 @@ package com.example.pro_fessor
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 
 @Suppress("DEPRECATION")
@@ -20,7 +18,7 @@ class MainActivity : ComponentActivity() {
 
         phoneButton.setOnClickListener {
             //phone 화면 라우팅
-            val intent = Intent(this, SearchActivity::class.java)
+            val intent = Intent(this, PhoneActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }

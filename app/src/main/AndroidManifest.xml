@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".PhoneActivity"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
