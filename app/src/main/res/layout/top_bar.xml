@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="연락처"
+            android:text="첫화면"
             android:textAlignment="center"
             android:textSize="22dp"
             android:textColor="@color/main_color" />
