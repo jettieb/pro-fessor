@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         searchButton.setOnClickListener {
             // Search 버튼 라우팅
         }
-    
+
 
         profileButton.setOnClickListener {
             // Profile 버튼 라우팅
