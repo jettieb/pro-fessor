@@ -39,6 +39,9 @@ class MainActivity : ComponentActivity() {
 
         imageButton.setOnClickListener {
             // image 버튼 라우팅
+            val intent = Intent(this, ImageActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         otherButton.setOnClickListener {
