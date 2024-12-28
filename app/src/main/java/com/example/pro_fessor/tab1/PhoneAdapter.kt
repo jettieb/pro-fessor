@@ -25,6 +25,10 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
         val imageView: ImageView = view.findViewById(R.id.phone_component_image)
         val cardView: CardView = view.findViewById(R.id.phone)
         val moreView: LinearLayout = view.findViewById(R.id.phone_component_more)
+        //전화/메세지/정보
+        val callView: ImageView = view.findViewById(R.id.phone_call)
+        val messageView: ImageView = view.findViewById(R.id.phone_message)
+        val infoView: ImageView = view.findViewById(R.id.phone_info)
     }
 
     // ViewHolder 생성 (아이템 레이아웃과 연결)
@@ -50,6 +54,17 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
             // 클릭 이벤트 설정
             holder.cardView.setOnClickListener {
                 holder.moreView.visibility = View.VISIBLE
+            }
+            // 전화 걸기
+            holder.callView.setOnClickListener{
+
+            }
+            // 메세지 보내기
+            holder.messageView.setOnClickListener {
+
+            }
+            //정보보기 - 다음
+            holder.infoView.setOnClickListener {
                 onItemClick(member.memberId) // 클릭된 아이템의 memberId를 전달
             }
         }
