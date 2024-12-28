@@ -13,9 +13,6 @@ import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupData
 import com.example.pro_fessor.sampledata.GalleryGroupDto
-import com.example.pro_fessor.sampledata.MemberData
-import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneAdapter
 
 class GalleryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

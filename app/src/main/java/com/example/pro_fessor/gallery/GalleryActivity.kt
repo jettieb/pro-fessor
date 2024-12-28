@@ -1,23 +1,16 @@
 package com.example.pro_fessor.gallery
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Window
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pro_fessor.ImageActivity
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupData
 import com.example.pro_fessor.sampledata.GalleryGroupDto
-import com.example.pro_fessor.sampledata.MemberData
-import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneActivity
 
 @Suppress("DEPRECATION")
 class GalleryActivity : AppCompatActivity() {

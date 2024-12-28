@@ -1,4 +1,4 @@
-package com.example.pro_fessor.tab1
+package com.example.pro_fessor.phone
 
 import android.os.Bundle
 import android.view.Window

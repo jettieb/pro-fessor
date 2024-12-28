@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneAdapter
-import com.example.pro_fessor.tab1.PhoneDetailActivity
+import com.example.pro_fessor.phone.PhoneAdapter
+import com.example.pro_fessor.phone.PhoneDetailActivity
 
 @Suppress("DEPRECATION")
 class PhoneFragment : Fragment() {
