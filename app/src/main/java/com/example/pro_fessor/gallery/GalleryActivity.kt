@@ -15,8 +15,8 @@ import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupData
 import com.example.pro_fessor.sampledata.GalleryGroupDto
-import com.example.pro_fessor.sampledata.PhoneData
-import com.example.pro_fessor.sampledata.PhoneDto
+import com.example.pro_fessor.sampledata.MemberData
+import com.example.pro_fessor.sampledata.MemberDto
 import com.example.pro_fessor.tab1.PhoneActivity
 
 @Suppress("DEPRECATION")
@@ -40,23 +40,7 @@ class GalleryActivity : AppCompatActivity() {
 //            overridePendingTransition(0, 0)
 //        }
 
-        val phoneButton = findViewById<ImageButton>(R.id.phone_button)
-        val imageButton = findViewById<ImageButton>(R.id.image_button)
-        val otherButton = findViewById<ImageButton>(R.id.other_button)
 
-        phoneButton.setOnClickListener {
-            //phone 화면 라우팅
-            val intent = Intent(this, PhoneActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-        }
-
-        imageButton.setOnClickListener {
-            // image 버튼 라우팅
-            val intent = Intent(this, GalleryActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-        }
     }
 
     //dummy data

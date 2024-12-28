@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.ImageActivity
 import com.example.pro_fessor.R
 import com.example.pro_fessor.gallery.GalleryActivity
-import com.example.pro_fessor.sampledata.PhoneData
-import com.example.pro_fessor.sampledata.PhoneDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
 
@@ -24,8 +22,8 @@ class PhoneActivity : AppCompatActivity() {
         setContentView(R.layout.activity_phone)
 
         // 상단바 텍스트 변경
-        val topBarTextView = findViewById<TextView>(R.id.top_bar_text)
-        topBarTextView.text = "연락처"
+        // val topBarTextView = findViewById<TextView>(R.id.top_bar_text)
+        // topBarTextView.text = "연락처"
 
         initRecycler()  //더미데이터 추가
 
@@ -37,23 +35,6 @@ class PhoneActivity : AppCompatActivity() {
 //            overridePendingTransition(0, 0)
 //        }
 
-        val phoneButton = findViewById<ImageButton>(R.id.phone_button)
-        val imageButton = findViewById<ImageButton>(R.id.image_button)
-        val otherButton = findViewById<ImageButton>(R.id.other_button)
-
-        phoneButton.setOnClickListener {
-            //phone 화면 라우팅
-            val intent = Intent(this, PhoneActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-        }
-
-        imageButton.setOnClickListener {
-            // image 버튼 라우팅
-            val intent = Intent(this, GalleryActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-        }
     }
 
     //dummy data

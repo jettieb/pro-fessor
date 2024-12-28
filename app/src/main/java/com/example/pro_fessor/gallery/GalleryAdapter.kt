@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryDto
-import com.example.pro_fessor.sampledata.PhoneDto
+import com.example.pro_fessor.sampledata.MemberDto
 
 class GalleryAdapter (private val dataList: List<GalleryDto>) :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>(){

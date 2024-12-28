@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupDto
-import com.example.pro_fessor.sampledata.PhoneDto
+import com.example.pro_fessor.sampledata.MemberDto
 
 class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>) :
     RecyclerView.Adapter<GalleryGroupAdapter.GalleryViewHolder>(){
