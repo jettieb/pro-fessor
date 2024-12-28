@@ -4,5 +4,5 @@ data class MemberDto(
     val memberId : Int,
     val name: String,
     val phone: String,
-    val email: String
+    val email: String,
 )

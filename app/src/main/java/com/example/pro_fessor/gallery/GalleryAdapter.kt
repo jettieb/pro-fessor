@@ -8,15 +8,18 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
+import com.example.pro_fessor.sampledata.GalleryGroupData
 import com.example.pro_fessor.sampledata.MemberDto
 
-class GalleryAdapter (private val dataList: List<GalleryDto>,
+class GalleryAdapter (private var dataList: MutableList<GalleryDto>,
                       private val onItemClick: (Int) -> Unit) :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>(){
     //View Holeder 클래스
     class GalleryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // 컴포넌트의 뷰를 저장하는 변수 선언
+
         val imageView: ImageView = view.findViewById(R.id.gallery_component_image)
         // val titleTextView: TextView = view.findViewById(R.id.gallery_component_title)
         // val abstractTextView: TextView = view.findViewById(R.id.gallery_component_abstract)
@@ -36,13 +39,15 @@ class GalleryAdapter (private val dataList: List<GalleryDto>,
 
     // dataList에 있는 목록들을 순서대로 가져옴
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
+
         val data = dataList[position]
 
         // holder.titleTextView.text = data.title
         // holder.abstractTextView.text = data.abstract
 
         //TODO: image는 임의로 example_mask로 넣어둠.
-        holder.imageView.setImageResource(R.drawable.img)
+        holder.imageView.setImageResource(data.image)
+
         // holder.imageGroupView.setImageResource(R.drawable.example_mask)
         holder.cardView.setOnClickListener {
             onItemClick(data.memberId) // 클릭된 아이템의 memberId를 전달
@@ -51,4 +56,23 @@ class GalleryAdapter (private val dataList: List<GalleryDto>,
 
     // 아이템 개수 반환
     override fun getItemCount(): Int = dataList.size
+
+
+
+    fun updateData(id: Int) {
+        val group_data = GalleryGroupData.getGalleryGroupDataList()
+        var date: String = ""
+        for (l in group_data) {
+            if (l.memberId == id) {
+                date = l.title
+                break
+            }
+        }
+        val img_data = GalleryData.getGalleryDataList()
+        val filteredData = img_data.filter { it.date == date}
+
+        dataList.clear()
+        dataList.addAll(filteredData)
+        notifyDataSetChanged()
+    }
 }

@@ -13,6 +13,7 @@ import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupData
+
 import com.example.pro_fessor.sampledata.GalleryGroupDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
@@ -28,7 +29,7 @@ class GalleryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        val galleryDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
+        var galleryDataList: MutableList<GalleryDto> = GalleryData.getGalleryDataList()
 
         val recyclerView1: RecyclerView = view.findViewById(R.id.recycler_view1)
         val galleryDataList1: List<GalleryGroupDto> = GalleryGroupData.getGalleryGroupDataList()
@@ -36,7 +37,7 @@ class GalleryFragment : Fragment() {
         topBarTextView.text = "오늘 한 것"
 
         recyclerView.layoutManager = GridLayoutManager(activity, 2)  // 아이템 세로로 나열
-        recyclerView.adapter = GalleryAdapter(galleryDataList) { id ->
+        val galleryAdapter = GalleryAdapter(galleryDataList) { id ->
             val fragment = GalleryDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
@@ -48,7 +49,12 @@ class GalleryFragment : Fragment() {
                 addToBackStack(null).commit()
         }
 
+        recyclerView.adapter = galleryAdapter
+        galleryAdapter.updateData(1)
+
         recyclerView1.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        recyclerView1.adapter = GalleryGroupAdapter(galleryDataList1)
+        recyclerView1.adapter = GalleryGroupAdapter(galleryDataList1) { id ->
+            galleryAdapter.updateData(id)
+        }
     }
 }

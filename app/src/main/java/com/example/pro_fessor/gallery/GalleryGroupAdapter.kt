@@ -5,13 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupDto
 import com.example.pro_fessor.sampledata.MemberDto
 
-class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>) :
+class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>,
+                           private val onItemClick: (Int) -> Unit) :
     RecyclerView.Adapter<GalleryGroupAdapter.GalleryViewHolder>(){
     //View Holeder 클래스
     class GalleryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -22,6 +24,7 @@ class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>) :
         val imageGroupView: ImageView = view.findViewById(R.id.gallery_group_image)
         val imageGroupTitle: TextView = view.findViewById(R.id.gallery_group_title)
         val imageGroupCount: TextView = view.findViewById(R.id.gallery_group_count)
+        val cardView: CardView = view.findViewById(R.id.gallery)
 
     }
 
@@ -45,7 +48,11 @@ class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>) :
 
         // TODO: image는 임의로 example_mask로 넣어둠.
         // holder.imageView.setImageResource(R.drawable.img)
+
         holder.imageGroupView.setImageResource(R.drawable.img)
+        holder.cardView.setOnClickListener {
+            onItemClick(data.memberId) // 클릭된 아이템의 memberId를 전달
+        }
     }
 
     // 아이템 개수 반환
