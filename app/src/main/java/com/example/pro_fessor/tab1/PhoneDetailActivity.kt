@@ -1,7 +1,9 @@
 package com.example.pro_fessor.tab1
 
 import android.os.Bundle
+import android.view.View
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pro_fessor.R
@@ -24,9 +26,10 @@ class PhoneDetailActivity : AppCompatActivity(){
                 val CVDataList: List<CVDto> = CVData.getCVDataList() //cv data
                 val cv = CVDataList.find{it.memberId == memberId}
                 if(cv != null){
-                    // 상단바 텍스트 변경
+                    // 상단바 텍스트 변경 및 뒤로가기 버튼 추가
                     val topBarTextView = findViewById<TextView>(R.id.top_bar_text)
                     topBarTextView.text = member.name
+                    findViewById<ImageView>(R.id.top_bar_arrow).visibility = View.VISIBLE
 
                     //xml 파일 내용
                     findViewById<TextView>(R.id.phone_detail_name).text = member.name
