@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
-import com.example.pro_fessor.sampledata.PhoneDto
+import com.example.pro_fessor.sampledata.MemberDto
 
-class PhoneAdapter (private val dataList: List<PhoneDto>) : RecyclerView.Adapter<PhoneAdapter.PhoneViewHolder>(){
+class PhoneAdapter (private val dataList: List<MemberDto>) : RecyclerView.Adapter<PhoneAdapter.PhoneViewHolder>(){
     //View Holeder 클래스
     class PhoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // 컴포넌트의 뷰를 저장하는 변수 선언
