@@ -15,30 +15,15 @@ import com.example.pro_fessor.tab1.PhoneAdapter
 import com.example.pro_fessor.tab1.PhoneDetailActivity
 
 @Suppress("DEPRECATION")
-class PhoneFragment : Fragment() {
+class PhoneDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_phone, container, false)
+        return inflater.inflate(R.layout.activity_phone_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.phone_recycler_view)
-        val phoneDataList: List<MemberDto> = MemberData.getPhoneDataList()
-
-        recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
-        recyclerView.adapter = PhoneAdapter(phoneDataList) { id ->
-
-            val fragment = PhoneDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("id", id)
-                }
-            }
-
-            requireActivity().supportFragmentManager.beginTransaction().
-                replace(R.id.content_frame, fragment).
-                addToBackStack(null).commit()
-        }
+        val id = arguments?.getInt("id") ?: -1
     }
 }
