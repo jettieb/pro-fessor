@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,8 @@ class GalleryFragment : Fragment() {
 
         val recyclerView1: RecyclerView = view.findViewById(R.id.recycler_view1)
         val galleryDataList1: List<GalleryGroupDto> = GalleryGroupData.getGalleryGroupDataList()
+        val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
+        topBarTextView.text = "오늘 한 것"
 
         recyclerView.layoutManager = GridLayoutManager(activity, 2)  // 아이템 세로로 나열
         recyclerView.adapter = GalleryAdapter(galleryDataList) { id ->
