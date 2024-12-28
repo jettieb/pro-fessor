@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="15dp"
             android:layout_gravity="center"
+            android:scaleType="fitCenter"
             android:src="@drawable/example_mask"/>
 
         <LinearLayout
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!--이름-->
             <TextView
                 android:id="@+id/phone_component_name"
                 android:layout_width="wrap_content"
@@ -46,6 +48,7 @@
                 android:layout_marginRight="20dp"
                 android:background="#1B262C" />
 
+            <!--전화번호-->
             <TextView
                 android:id="@+id/phone_component_phone"
                 android:layout_width="wrap_content"
@@ -55,6 +58,7 @@
                 android:textColor="@color/font_color"
                 android:text="010-0000-0000"/>
 
+            <!--이메일-->
             <TextView
                 android:id="@+id/phone_component_email"
                 android:layout_width="wrap_content"
