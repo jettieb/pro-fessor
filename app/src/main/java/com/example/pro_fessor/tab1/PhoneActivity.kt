@@ -23,22 +23,21 @@ class PhoneActivity : AppCompatActivity() {
         topBarTextView.text = "연락처"
 
         initRecycler()  //더미데이터 추가
-
-//        val phoneComponent = findViewById<androidx.cardview.widget.CardView>(R.id.phone)
-//        //phone detail 화면 라우팅
-//        phoneComponent.setOnClickListener {
-//            val intent = Intent(this, PhoneDetailActivity::class.java)
-//            startActivity(intent)
-//            overridePendingTransition(0, 0)
-//        }
     }
 
     //dummy data
     private fun initRecycler(){
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val recyclerView: RecyclerView = findViewById(R.id.phone_recycler_view)
         val phoneDataList: List<MemberDto> = MemberData.getPhoneDataList()
 
         recyclerView.layoutManager = LinearLayoutManager(this)  // 아이템 세로로 나열
-        recyclerView.adapter = PhoneAdapter(phoneDataList)
+        recyclerView.adapter = PhoneAdapter(phoneDataList) { id ->
+            val intent = Intent(this, PhoneDetailActivity::class.java).apply {
+                putExtra("id", id)
+                //전달된 데이터 getIntent().getIntExtra("id", defaultValue)로 꺼낼 수 있음
+            }
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 }
