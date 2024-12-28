@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, PhoneFragment()).commit()
 
         // 하단바 동작 설정 (id값으로 들고옴)
         val phoneButton = findViewById<ImageButton>(R.id.phone_button)

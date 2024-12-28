@@ -30,7 +30,7 @@ class GalleryActivity : AppCompatActivity() {
         // val topBarTextView = findViewById<TextView>(R.id.top_bar_text)
         // topBarTextView.text = "오늘 한 것"
 
-        initRecycler()  //더미데이터 추가
+        //initRecycler()  //더미데이터 추가
 
 //        val phoneComponent = findViewById<androidx.cardview.widget.CardView>(R.id.phone)
 //        //phone detail 화면 라우팅
@@ -44,17 +44,5 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     //dummy data
-    private fun initRecycler(){
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        val galleryDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
 
-        val recyclerView1: RecyclerView = findViewById(R.id.recycler_view1)
-        val galleryDataList1: List<GalleryGroupDto> = GalleryGroupData.getGalleryGroupDataList()
-
-        recyclerView.layoutManager = GridLayoutManager(this, 2)  // 아이템 세로로 나열
-        recyclerView.adapter = GalleryAdapter(galleryDataList)
-
-        recyclerView1.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView1.adapter = GalleryGroupAdapter(galleryDataList1)
-    }
 }

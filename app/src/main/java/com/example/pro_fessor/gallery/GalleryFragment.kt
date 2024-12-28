@@ -33,7 +33,17 @@ class GalleryFragment : Fragment() {
         val galleryDataList1: List<GalleryGroupDto> = GalleryGroupData.getGalleryGroupDataList()
 
         recyclerView.layoutManager = GridLayoutManager(activity, 2)  // 아이템 세로로 나열
-        recyclerView.adapter = GalleryAdapter(galleryDataList)
+        recyclerView.adapter = GalleryAdapter(galleryDataList) { id ->
+            val fragment = GalleryDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("id", id)
+                }
+            }
+
+            requireActivity().supportFragmentManager.beginTransaction().
+                replace(R.id.content_frame, fragment).
+                addToBackStack(null).commit()
+        }
 
         recyclerView1.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerView1.adapter = GalleryGroupAdapter(galleryDataList1)
