@@ -11,6 +11,7 @@ import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.PhoneData
 import com.example.pro_fessor.sampledata.PhoneDto
 
+@Suppress("DEPRECATION")
 class PhoneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +22,7 @@ class PhoneActivity : AppCompatActivity() {
         val topBarTextView = findViewById<TextView>(R.id.top_bar_text)
         topBarTextView.text = "연락처"
 
-        initRecycler()  //더미데이터
+        initRecycler()  //더미데이터 추가
 
         val phoneComponent = findViewById<androidx.cardview.widget.CardView>(R.id.phone)
         //phone detail 화면 라우팅
