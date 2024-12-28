@@ -1,5 +1,6 @@
 package com.example.pro_fessor.tab1
 
+import CVData
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.ImageActivity
 import com.example.pro_fessor.R
 import com.example.pro_fessor.gallery.GalleryActivity
+import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
 
@@ -41,9 +43,10 @@ class PhoneActivity : AppCompatActivity() {
     private fun initRecycler(){
         val recyclerView: RecyclerView = findViewById(R.id.phone_recycler_view)
         val phoneDataList: List<MemberDto> = MemberData.getPhoneDataList()
+        val cvDataList : List<CVDto> = CVData.getCVDataList()
 
         recyclerView.layoutManager = LinearLayoutManager(this)  // 아이템 세로로 나열
-        recyclerView.adapter = PhoneAdapter(phoneDataList) { id ->
+        recyclerView.adapter = PhoneAdapter(phoneDataList, cvDataList) { id ->
             val intent = Intent(this, PhoneDetailActivity::class.java).apply {
                 putExtra("id", id)
                 //전달된 데이터 getIntent().getIntExtra("id", defaultValue)로 꺼낼 수 있음

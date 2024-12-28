@@ -12,60 +12,79 @@
     app:cardElevation="0dp">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingVertical="13dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/phone_component_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="15dp"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:src="@drawable/example_mask"/>
-
+        <!--고정 상단바-->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="16dp">
 
-            <!--이름-->
-            <TextView
-                android:id="@+id/phone_component_name"
+            <ImageView
+                android:id="@+id/phone_component_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="@color/font_color"
-                android:layout_marginBottom="3dp"
-                android:text="홍길동"/>
+                android:paddingHorizontal="15dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:src="@drawable/example_mask"/>
 
-            <!--구분선-->
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginRight="20dp"
-                android:background="#1B262C" />
-
-            <!--전화번호-->
-            <TextView
-                android:id="@+id/phone_component_phone"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:textSize="15sp"
-                android:textColor="@color/font_color"
-                android:text="010-0000-0000"/>
+                android:orientation="vertical">
 
-            <!--이메일-->
-            <TextView
-                android:id="@+id/phone_component_email"
+                <!--이름-->
+                <TextView
+                    android:id="@+id/phone_component_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/font_color"
+                    android:text="홍길동"/>
+
+                <!--학석박-->
+                <TextView
+                    android:id="@+id/phone_component_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/main_color"
+                    android:text="석사"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--추가 하단바 (기본은 안보이되, 사용자가 클릭하면 해당 component에만 생김-->
+        <LinearLayout
+            android:id="@+id/phone_component_more"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginVertical="8dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/font_color"
-                android:text="red_road_dong@gmail.com"/>
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/phone"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/message"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/information"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
