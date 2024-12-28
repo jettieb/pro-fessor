@@ -25,7 +25,9 @@
         <activity
             android:name=".tab1.PhoneActivity"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".ImageActivity"></activity>
+        <activity
+            android:name=".gallery.GalleryActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>
