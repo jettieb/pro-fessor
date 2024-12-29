@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
@@ -22,6 +23,12 @@ class GalleryDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
+        backArrow.visibility = View.VISIBLE
+        backArrow.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
 
         val memberId = arguments?.getInt("id") ?: -1
         if (memberId != -1){
