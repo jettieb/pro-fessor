@@ -24,10 +24,13 @@
             android:authorities="com.example.pro_fessor.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
-        <meta-data
-            android:name="android.support.FILE_PROVIDER_PATHS"
-            android:resource="@xml/file_paths" />
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
         </provider>
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="aqsdn9fum6" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
