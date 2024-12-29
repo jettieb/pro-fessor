@@ -1,17 +1,13 @@
 package com.example.pro_fessor
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.widget.ImageButton
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.pro_fessor.gallery.GalleryActivity
 import com.example.pro_fessor.gallery.GalleryFragment
 import com.example.pro_fessor.gallery.PhoneFragment
-import com.example.pro_fessor.tab1.PhoneActivity
 
 
 @Suppress("DEPRECATION")
