@@ -25,11 +25,13 @@
 
             <ImageView
                 android:id="@+id/phone_component_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="15dp"
+                android:background="@drawable/circle"
+                android:clipToOutline="true"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_gravity="center"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 android:src="@drawable/example_mask"/>
 
             <LinearLayout
@@ -42,6 +44,7 @@
                     android:id="@+id/phone_component_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
                     android:textSize="18sp"
                     android:textColor="@color/font_color"
                     android:text="홍길동"/>
