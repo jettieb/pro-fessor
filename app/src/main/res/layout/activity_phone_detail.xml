@@ -28,11 +28,13 @@
 
                 <ImageView
                     android:id="@+id/phone_detail_image"
+                    android:background="@drawable/circle"
+                    android:clipToOutline="true"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/example_mask" />
 
                 <LinearLayout
@@ -50,6 +52,7 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="3dp"
                         android:text="홍길동"
+                        android:fontFamily="@font/pretendard_regular"
                         android:textColor="@color/font_color"
                         android:textSize="27sp" />
 
@@ -69,6 +72,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="박사"
                         android:textColor="@color/font_color"
+                        android:fontFamily="@font/pretendard_regular"
                         android:textSize="20sp" />
 
                     <!--이메일-->
@@ -80,6 +84,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="red_road_dong@gmail.com"
                         android:textColor="@color/font_color"
+                        android:fontFamily="@font/pretendard_regular"
                         android:textSize="13sp" />
 
                     <LinearLayout
@@ -104,6 +109,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
                             android:text="010-0000-0000"
+                            android:fontFamily="@font/pretendard_regular"
                             android:textColor="@color/font_color"
                             android:textSize="13sp" />
                     </LinearLayout>
@@ -125,6 +131,7 @@
                     android:layout_marginBottom="3dp"
                     android:text="Education"
                     android:textColor="@color/font_color"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="20sp" />
 
                 <!--구분선-->
@@ -145,6 +152,7 @@
                     android:text="경기고등학교 졸업\n서울대학교 졸업\n- 기계공학과 주전공\n- 산업디자인과 복수전공\n- 4.20/4.5 GPA"
                     android:textColor="@color/black"
                     android:lineSpacingExtra="1dp"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -164,6 +172,7 @@
                     android:layout_marginBottom="3dp"
                     android:text="Work Experience"
                     android:textColor="@color/font_color"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="20sp" />
 
                 <!--구분선-->
@@ -184,6 +193,7 @@
                     android:text="경기고등학교 졸업\n서울대학교 졸업\n- 기계공학과 주전공\n- 산업디자인과 복수전공\n- 4.20/4.5 GPA"
                     android:textColor="@color/black"
                     android:lineSpacingExtra="1dp"
+                    android:fontFamily="@font/pretendard_regular"
                     android:textSize="15sp" />
 
             </LinearLayout>

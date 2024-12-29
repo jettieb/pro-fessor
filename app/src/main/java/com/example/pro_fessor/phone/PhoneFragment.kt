@@ -1,6 +1,5 @@
 package com.example.pro_fessor.gallery
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneAdapter
-import com.example.pro_fessor.tab1.PhoneDetailActivity
+import com.example.pro_fessor.phone.PhoneAdapter
 
 @Suppress("DEPRECATION")
 class PhoneFragment : Fragment() {
@@ -26,9 +25,10 @@ class PhoneFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.phone_recycler_view)
         val phoneDataList: List<MemberDto> = MemberData.getPhoneDataList()
+        val cvDataList : List<CVDto> = CVData.getCVDataList()
 
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
-        recyclerView.adapter = PhoneAdapter(phoneDataList) { id ->
+        recyclerView.adapter = PhoneAdapter(phoneDataList, cvDataList) { id ->
 
             val fragment = PhoneDetailFragment().apply {
                 arguments = Bundle().apply {
