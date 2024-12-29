@@ -5,5 +5,6 @@ data class GalleryDto(
     val memberId: Int,
     val title: String,
     val abstract: String,
+    val imagePath: String? = null,
     val image: Int
 )

@@ -1,6 +1,7 @@
 package com.example.pro_fessor
 
 import android.content.Intent
+import android.content.UriPermission
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
@@ -12,10 +13,16 @@ import com.example.pro_fessor.gallery.GalleryActivity
 import com.example.pro_fessor.gallery.GalleryFragment
 import com.example.pro_fessor.gallery.PhoneFragment
 import com.example.pro_fessor.tab1.PhoneActivity
+import android.graphics.Camera
+import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -55,4 +62,6 @@ class MainActivity : AppCompatActivity() {
             // other 버튼 라우팅
         }
     }
+
+
 }

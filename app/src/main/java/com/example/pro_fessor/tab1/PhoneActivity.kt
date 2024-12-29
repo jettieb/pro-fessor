@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pro_fessor.ImageActivity
 import com.example.pro_fessor.R
 import com.example.pro_fessor.gallery.GalleryActivity
 import com.example.pro_fessor.sampledata.MemberData

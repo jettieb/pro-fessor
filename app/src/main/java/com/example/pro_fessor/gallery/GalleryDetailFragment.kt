@@ -1,6 +1,7 @@
 package com.example.pro_fessor.gallery
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +36,8 @@ class GalleryDetailFragment : Fragment() {
             val member = memberDataList.find { it.memberId == memberId }    //람다식 내부에서 그 파라미터를 it라는 기본 이름으로 찾기 가능
 
             if(member != null){
-                view.findViewById<ImageView>(R.id.gallery_component_image).setImageResource(member.image)
+                val bitmap = BitmapFactory.decodeFile(member.imagePath) // 파일 경로에서 Bitmap 생성
+                view.findViewById<ImageView>(R.id.gallery_component_image).setImageBitmap(bitmap)
             }
         }
     }

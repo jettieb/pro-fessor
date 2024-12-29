@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pro_fessor.ImageActivity
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto

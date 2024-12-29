@@ -3,8 +3,8 @@ package com.example.pro_fessor.sampledata
 object GalleryGroupData {
     fun getGalleryGroupDataList(): List<GalleryGroupDto> {
         return listOf(
-            GalleryGroupDto(1, "12-31", 33),
-            GalleryGroupDto(2, "12-30", 2),
+            GalleryGroupDto(1, "2024-12-29", 33),
+            GalleryGroupDto(2, "2024-12-28", 2),
             GalleryGroupDto(3, "12-29", 23),
             GalleryGroupDto(4, "12-28", 34),
             GalleryGroupDto(5, "12월 27일", 42),
