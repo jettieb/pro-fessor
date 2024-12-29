@@ -28,11 +28,13 @@
 
                 <ImageView
                     android:id="@+id/phone_detail_image"
+                    android:background="@drawable/circle"
+                    android:clipToOutline="true"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/example_mask" />
 
                 <LinearLayout
