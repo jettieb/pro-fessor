@@ -23,7 +23,6 @@ import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
 import com.example.pro_fessor.sampledata.GalleryGroupData
 import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneActivity
 
 
 @Suppress("DEPRECATION")
