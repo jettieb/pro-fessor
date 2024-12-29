@@ -29,7 +29,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/recycler_view"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="8dp"
                 android:background="@color/background"
                 app:layout_constraintHorizontal_weight="1"/>
 

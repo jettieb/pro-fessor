@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.pro_fessor.gallery.GalleryFragment
 import com.example.pro_fessor.gallery.PhoneFragment
-import com.example.pro_fessor.tab1.PhoneActivity
 import android.graphics.Camera
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
@@ -39,22 +38,13 @@ class MainActivity : AppCompatActivity() {
 
         phoneButton.setOnClickListener {
             Log.d("Button","button clicked")
-
-            //phone 화면 라우팅
-//            val intent = Intent(this, PhoneActivity::class.java)
-//            startActivity(intent)
             supportFragmentManager.beginTransaction().
                 replace(R.id.content_frame, PhoneFragment()).commit()
-            //overridePendingTransition(0, 0)
         }
 
         imageButton.setOnClickListener {
-            // image 버튼 라우팅
-//            val intent = Intent(this, GalleryActivity::class.java)
-//            startActivity(intent)
             supportFragmentManager.beginTransaction().
             replace(R.id.content_frame, GalleryFragment()).commit()
-           // overridePendingTransition(0, 0)
         }
 
         otherButton.setOnClickListener {

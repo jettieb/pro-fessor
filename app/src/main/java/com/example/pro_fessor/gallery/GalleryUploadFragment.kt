@@ -1,6 +1,5 @@
 package com.example.pro_fessor.gallery
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -11,19 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
-import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
-import com.example.pro_fessor.sampledata.MemberData
-import com.example.pro_fessor.sampledata.MemberDto
-import com.example.pro_fessor.tab1.PhoneAdapter
-import com.example.pro_fessor.tab1.PhoneDetailActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -45,8 +36,6 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val uploadButton = view.findViewById<Button>(R.id.uploadButton)
 
-
-
         imagePath?.let { path ->
             try {
                 val bitmap = if (path.startsWith("content://")) {
@@ -61,7 +50,6 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
             }
         }
 
-        // 업로드 버튼 클릭 이벤트 처리
         uploadButton.setOnClickListener {
             val title = titleEditText.text.toString()
             val abstractText = abstractEditText.text.toString()
@@ -71,7 +59,6 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
                 return@setOnClickListener
             }
 
-            // 새 데이터 생성
             val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             val newGalleryItem = GalleryDto(
                 date = currentDate,
@@ -82,11 +69,9 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
                 image = -1
             )
             Log.d("Date", currentDate)
-            // 데이터 리스트에 추가
             GalleryData.addGalleryItem(newGalleryItem)
             Log.d("GalleryData", "Current GalleryData: ${GalleryData.getGalleryDataList()}")
             galleryAdapter?.updateData(0)
-            // Fragment 전환 또는 갤러리 화면 갱신
             Toast.makeText(requireContext(), "업로드 완료!", Toast.LENGTH_SHORT).show()
             requireActivity().supportFragmentManager.popBackStack()
         }
