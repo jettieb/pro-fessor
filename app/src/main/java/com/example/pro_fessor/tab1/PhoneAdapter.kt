@@ -1,5 +1,6 @@
 package com.example.pro_fessor.tab1
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
                     private val cvList: List<CVDto>,
                     private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
     : RecyclerView.Adapter<PhoneAdapter.PhoneViewHolder>(){
+        
+    // 하나만 창이 열릴 수 있도록 이전에 열린 창 저장하는 변수 설정
+    private var previousClick: Int = -1
 
     //View Holeder 클래스
     class PhoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,7 +44,7 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
         return PhoneViewHolder(view)
     }
 
-    // dataList에 있는 목록들을 순서대로 가져옴
+    // 생성된 뷰홀더에 데이터를 바인딩 - 스크롤 및 이벤트 발생 시 마다 호출됨!
     override fun onBindViewHolder(holder: PhoneViewHolder, position: Int) {
         val member = memberList[position]
         val cv = cvList.find{it.memberId == member.memberId}
@@ -51,10 +55,20 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
             //TODO: image는 임의로 example_mask로 넣어둠.
             holder.imageView.setImageResource(R.drawable.example_mask)
 
-            // 클릭 이벤트 설정
+            // 현재 아이템이 previousClick인 경우 moreView를 표시, 아니면 숨김
+            holder.moreView.visibility = if (position == previousClick) View.VISIBLE else View.GONE
+            // 클릭 이벤트
             holder.cardView.setOnClickListener {
-                holder.moreView.visibility = View.VISIBLE
+                // 이전에 열렸던 창이 있으면 닫음
+                if (previousClick != -1 && previousClick != position) {
+                    notifyItemChanged(previousClick)    //이전 창만 새로 갱신
+                }
+                // 동일한 아이템 클릭 시 닫기
+                // 다른 아이템 클릭 시 previousClick 변수 설정
+                previousClick = if (position == previousClick) -1 else position
+                notifyItemChanged(position) // 현재 창 열기/닫기
             }
+
             // 전화 걸기
             holder.callView.setOnClickListener{
 
