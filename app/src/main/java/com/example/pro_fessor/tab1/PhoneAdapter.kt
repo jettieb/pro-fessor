@@ -1,6 +1,7 @@
 package com.example.pro_fessor.tab1
 
-import android.util.Log
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,13 +72,19 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
 
             // 전화 걸기
             holder.callView.setOnClickListener{
-
+                val intent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:" + member.phone)
+                }
+                holder.itemView.context.startActivity(intent)
             }
             // 메세지 보내기
             holder.messageView.setOnClickListener {
-
+                val intent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("smsto:" + member.phone)
+                }
+                holder.itemView.context.startActivity(intent)
             }
-            //정보보기 - 다음
+            // 정보 보기
             holder.infoView.setOnClickListener {
                 onItemClick(member.memberId) // 클릭된 아이템의 memberId를 전달
             }
