@@ -38,7 +38,11 @@ class PhoneDetailFragment : Fragment() {
                 if(cv != null){
                     // 상단바 텍스트 변경 및 뒤로가기 버튼 추가
                     view.findViewById<TextView>(R.id.top_bar_text).text = member.name
-                    view.findViewById<ImageView>(R.id.top_bar_arrow).visibility = View.VISIBLE
+                    val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
+                    backArrow.visibility = View.VISIBLE
+                    backArrow.setOnClickListener {
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
 
                     //xml 파일 내용
                     view.findViewById<TextView>(R.id.phone_detail_name).text = member.name
