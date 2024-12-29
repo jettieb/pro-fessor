@@ -1,4 +1,4 @@
-package com.example.pro_fessor.tab1
+package com.example.pro_fessor.phone
 
 import android.content.Intent
 import android.net.Uri
@@ -19,12 +19,10 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
                     private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
     : RecyclerView.Adapter<PhoneAdapter.PhoneViewHolder>(){
         
-    // 하나만 창이 열릴 수 있도록 이전에 열린 창 저장하는 변수 설정
+    // 클릭 시 하나의 창만 열릴 수 있도록 이전에 열린 창 저장하는 변수 설정
     private var previousClick: Int = -1
 
-    //View Holeder 클래스
     class PhoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        // 컴포넌트의 뷰를 저장하는 변수 선언
         val nameTextView: TextView = view.findViewById(R.id.phone_component_name)
         val statusTextView: TextView = view.findViewById(R.id.phone_component_status)
         val imageView: ImageView = view.findViewById(R.id.phone_component_image)
@@ -38,8 +36,7 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
 
     // ViewHolder 생성 (아이템 레이아웃과 연결)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneViewHolder {
-        // phone_component.xml 파일을 뷰 객체로 변환
-        // 변환한 뷰를 PhoneViewHolder에 전달하여 ViewHold 객체 생성
+        // phone_component.xml 파일을 뷰 객체로 변환 후 PhoneViewHolder에 전달하여 ViewHold 객체 생성
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.phone_component, parent, false)
         return PhoneViewHolder(view)
@@ -58,16 +55,15 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
 
             // 현재 아이템이 previousClick인 경우 moreView를 표시, 아니면 숨김
             holder.moreView.visibility = if (position == previousClick) View.VISIBLE else View.GONE
-            // 클릭 이벤트
             holder.cardView.setOnClickListener {
                 // 이전에 열렸던 창이 있으면 닫음
                 if (previousClick != -1 && previousClick != position) {
-                    notifyItemChanged(previousClick)    //이전 창만 새로 갱신
+                    notifyItemChanged(previousClick)
                 }
                 // 동일한 아이템 클릭 시 닫기
                 // 다른 아이템 클릭 시 previousClick 변수 설정
                 previousClick = if (position == previousClick) -1 else position
-                notifyItemChanged(position) // 현재 창 열기/닫기
+                notifyItemChanged(position)
             }
 
             // 전화 걸기
@@ -86,7 +82,7 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
             }
             // 정보 보기
             holder.infoView.setOnClickListener {
-                onItemClick(member.memberId) // 클릭된 아이템의 memberId를 전달
+                onItemClick(member.memberId)
             }
         }
     }
