@@ -33,16 +33,14 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
         val messageView: ImageView = view.findViewById(R.id.phone_message)
         val infoView: ImageView = view.findViewById(R.id.phone_info)
     }
-
-    // ViewHolder 생성 (아이템 레이아웃과 연결)
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneViewHolder {
-        // phone_component.xml 파일을 뷰 객체로 변환 후 PhoneViewHolder에 전달하여 ViewHold 객체 생성
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.phone_component, parent, false)
         return PhoneViewHolder(view)
     }
 
-    // 생성된 뷰홀더에 데이터를 바인딩 - 스크롤 및 이벤트 발생 시 마다 호출됨!
+    // 생성된 뷰홀더에 데이터를 바인딩 - 스크롤 및 이벤트 발생 시 마다 호출됨
     override fun onBindViewHolder(holder: PhoneViewHolder, position: Int) {
         val member = memberList[position]
         val cv = cvList.find{it.memberId == member.memberId}
@@ -53,7 +51,7 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
             //TODO: image는 임의로 example_mask로 넣어둠.
             holder.imageView.setImageResource(R.drawable.example_mask)
 
-            // 현재 아이템이 previousClick인 경우 moreView를 표시, 아니면 숨김
+            // 현재 아이템이 상태 확인
             holder.moreView.visibility = if (position == previousClick) View.VISIBLE else View.GONE
             holder.cardView.setOnClickListener {
                 // 이전에 열렸던 창이 있으면 닫음
@@ -86,7 +84,6 @@ class PhoneAdapter (private val memberList: List<MemberDto>,
             }
         }
     }
-
-    // 아이템 개수 반환
+    
     override fun getItemCount(): Int = memberList.size
 }

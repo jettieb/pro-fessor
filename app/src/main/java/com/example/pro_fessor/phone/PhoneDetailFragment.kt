@@ -25,7 +25,7 @@ class PhoneDetailFragment : Fragment() {
         val memberId = arguments?.getInt("id") ?: -1
         if (memberId != -1){
             val memberDataList: List<MemberDto> = MemberData.getPhoneDataList() //member data
-            val member = memberDataList.find { it.memberId == memberId }    //람다식 내부에서 그 파라미터를 it라는 기본 이름으로 찾기 가능
+            val member = memberDataList.find { it.memberId == memberId }
 
             if(member != null){
                 val CVDataList: List<CVDto> = CVData.getCVDataList() //cv data
