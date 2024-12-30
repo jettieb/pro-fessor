@@ -35,6 +35,7 @@ class PhoneDetailFragment : Fragment() {
                     view.findViewById<TextView>(R.id.top_bar_text).text = member.name
                     val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
                     backArrow.visibility = View.VISIBLE
+
                     backArrow.setOnClickListener {
                         requireActivity().onBackPressedDispatcher.onBackPressed()
                     }

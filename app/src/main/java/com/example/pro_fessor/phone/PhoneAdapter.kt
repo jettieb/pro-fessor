@@ -1,6 +1,9 @@
 package com.example.pro_fessor.phone
 
+import CVData
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.compose.ui.graphics.Color
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
@@ -22,7 +26,7 @@ sealed class ListItem {
     data class Contact(val member: MemberDto, val qualification: String) : ListItem()
 }
 
-class PhoneAdapter(private val sectionedList: List<ListItem>,
+class PhoneAdapter(private var sectionedList: List<ListItem>,
                    private val onItemClick: (Int) -> Unit,
                    private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -100,6 +104,10 @@ class PhoneAdapter(private val sectionedList: List<ListItem>,
 
         return sectionedList.size
     }
+    fun updateData(newData: List<ListItem>) {
+        sectionedList = newData
+        notifyDataSetChanged()
+    }
 }
 
 class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -136,7 +144,12 @@ class ContactViewHolder(
         isLastInSection: Boolean
     ) {
         nameTextView.text = member.name
-        statusTextView.text = qualification
+        for (cv in CVData.getCVDataList()) {
+            if (cv.memberId == member.memberId) {
+                statusTextView.text = cv.studentID
+                break
+            }
+        }
         imageView.setImageResource(member.imgPath)
         // View 초기화
 
@@ -145,8 +158,13 @@ class ContactViewHolder(
         lineView.visibility = View.GONE // 기본적으로 숨김 처리
 
         when {
-            isFirstInSection -> {
+            isFirstInSection && isLastInSection -> {
+                // 둘 다 true일 때 처리
                 frameView.setBackgroundResource(R.drawable.rounded_card_background)
+                lineView.visibility = View.GONE
+            }
+            isFirstInSection -> {
+                frameView.setBackgroundResource(R.drawable.rounded_card_background_top)
                 lineView.visibility = View.GONE
             }
             isLastInSection -> {
@@ -165,6 +183,7 @@ class ContactViewHolder(
         moreView.visibility = if (isExpanded) View.VISIBLE else View.GONE
 
         cardView.setOnClickListener {
+
             onCardClick(adapterPosition) // 클릭된 위치 전달
         }
 
@@ -191,6 +210,8 @@ class ContactViewHolder(
             onLocationClick(member.memberId)
         }
     }
+
+
 }
 
 

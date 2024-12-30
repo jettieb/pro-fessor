@@ -13,6 +13,7 @@ import com.example.pro_fessor.gallery.GalleryFragment
 import com.example.pro_fessor.gallery.PhoneFragment
 import android.graphics.Camera
 import android.net.Uri
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.pro_fessor.map.MapFragment
@@ -33,11 +34,14 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.content_frame, PhoneFragment()).commit()
 
         // 하단바 동작 설정 (id값으로 들고옴)
+        val phoneLayout= findViewById<LinearLayout>(R.id.phoneLayout)
+        val imageLayout = findViewById<LinearLayout>(R.id.imageLayout)
+        val otherLayout = findViewById<LinearLayout>(R.id.otherLayout)
         val phoneButton = findViewById<ImageButton>(R.id.phone_button)
         val imageButton = findViewById<ImageButton>(R.id.image_button)
         val otherButton = findViewById<ImageButton>(R.id.other_button)
 
-        phoneButton.setOnClickListener {
+        phoneLayout.setOnClickListener {
             Log.d("Button","button clicked")
             phoneButton.setImageResource(R.drawable.bottom_phone)
             imageButton.setImageResource(R.drawable.bottom_image_unselected)
@@ -45,7 +49,22 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().
                 replace(R.id.content_frame, PhoneFragment()).commit()
         }
+        phoneButton.setOnClickListener {
+            Log.d("Button","button clicked")
+            phoneButton.setImageResource(R.drawable.bottom_phone)
+            imageButton.setImageResource(R.drawable.bottom_image_unselected)
+            otherButton.setImageResource(R.drawable.bottom_other_unselected)
+            supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, PhoneFragment()).commit()
+        }
 
+        imageLayout.setOnClickListener {
+            phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
+            imageButton.setImageResource(R.drawable.bottom_image)
+            otherButton.setImageResource(R.drawable.bottom_other_unselected)
+            supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, GalleryFragment()).commit()
+        }
         imageButton.setOnClickListener {
             phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
             imageButton.setImageResource(R.drawable.bottom_image)
@@ -54,6 +73,13 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.content_frame, GalleryFragment()).commit()
         }
 
+        otherLayout.setOnClickListener {
+            phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
+            imageButton.setImageResource(R.drawable.bottom_image_unselected)
+            otherButton.setImageResource(R.drawable.bottom_other)
+            supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, MapFragment()).commit()
+        }
         otherButton.setOnClickListener {
             phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
             imageButton.setImageResource(R.drawable.bottom_image_unselected)

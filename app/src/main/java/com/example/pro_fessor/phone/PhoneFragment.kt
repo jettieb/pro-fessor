@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +38,20 @@ class PhoneFragment : Fragment() {
 
         val sectionedList = prepareSectionedList(memberDataList, cvDataList)
 
+        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
+        searchButton.setOnClickListener {
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
+                    R.anim.slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
+                    R.anim.slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
+                    R.anim.slide_out_right
+                )
+                .replace(R.id.content_frame, PhoneSearchFragment())
+                .addToBackStack(null)
+                .commit()
+        }
 
         // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
@@ -47,8 +63,13 @@ class PhoneFragment : Fragment() {
                     putInt("id", id)
                 }
             }
-
             requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_up,
+                    0,
+                    0,
+                    R.anim.slide_out_down
+                )
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
                 .commit()
