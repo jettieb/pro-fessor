@@ -23,9 +23,6 @@ import com.example.pro_fessor.mission.MissionFragment
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)    //자동 생성 상단바 없앰
