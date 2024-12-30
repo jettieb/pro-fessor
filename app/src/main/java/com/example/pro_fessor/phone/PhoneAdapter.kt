@@ -67,7 +67,11 @@ class PhoneAdapter(private val sectionedList: List<ListItem>,
 
                 val isExpanded = position == previousClick
                 val isFirstInSection = position > 0 && sectionedList[position - 1] is ListItem.Header
-                val isLastInSection = position < sectionedList.size - 1 && sectionedList[position + 1] is ListItem.Header
+                val isLastInSection = when {
+                    position == sectionedList.size - 1 -> true // 리스트의 마지막 요소인 경우
+                    sectionedList[position + 1] is ListItem.Header -> true // 다음 아이템이 헤더인 경우
+                    else -> false // 그 외
+                }
                 Log.d("hello", isFirstInSection.toString())
                 Log.d("hello", isLastInSection.toString())
                 Log.d("hello", isExpanded.toString())
@@ -130,10 +134,10 @@ class ContactViewHolder(
         nameTextView.text = member.name
         statusTextView.text = qualification
 
-
         // View 초기화
-        frameView.setBackgroundResource(0) // 기존 배경 제거
-        cardView.setCardBackgroundColor(cardView.context.getColor(R.color.white)) // 기본 색상
+
+        frameView.setBackgroundResource(R.color.background)
+        cardView.setCardBackgroundColor(cardView.context.getColor(R.color.background)) // 기본 색상
         lineView.visibility = View.GONE // 기본적으로 숨김 처리
 
         when {
@@ -147,7 +151,8 @@ class ContactViewHolder(
             }
             else -> {
                 Log.d("hello", "It is in the middle")
-                cardView.setCardBackgroundColor(cardView.context.getColor(R.color.black))
+                frameView.setBackgroundResource(R.color.background2)
+                cardView.setCardBackgroundColor(cardView.context.getColor(R.color.background2))
                 lineView.visibility = View.VISIBLE
             }
         }

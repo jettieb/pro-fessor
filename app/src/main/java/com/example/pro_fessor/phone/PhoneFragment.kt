@@ -34,7 +34,6 @@ class PhoneFragment : Fragment() {
         // 섹션화된 데이터 준비
         val sectionedList = prepareSectionedList(phoneDataList, cvDataList)
 
-
         // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
         Log.d("hi", sectionedList.toString())

@@ -20,5 +20,4 @@
     <!-- Include 하단바 -->
     <include
         layout="@layout/bottom_bar" />
-
 </LinearLayout>

@@ -39,16 +39,25 @@ class MainActivity : AppCompatActivity() {
 
         phoneButton.setOnClickListener {
             Log.d("Button","button clicked")
+            phoneButton.setImageResource(R.drawable.bottom_phone)
+            imageButton.setImageResource(R.drawable.bottom_image_unselected)
+            otherButton.setImageResource(R.drawable.bottom_other_unselected)
             supportFragmentManager.beginTransaction().
                 replace(R.id.content_frame, PhoneFragment()).commit()
         }
 
         imageButton.setOnClickListener {
+            phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
+            imageButton.setImageResource(R.drawable.bottom_image)
+            otherButton.setImageResource(R.drawable.bottom_other_unselected)
             supportFragmentManager.beginTransaction().
             replace(R.id.content_frame, GalleryFragment()).commit()
         }
 
         otherButton.setOnClickListener {
+            phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
+            imageButton.setImageResource(R.drawable.bottom_image_unselected)
+            otherButton.setImageResource(R.drawable.bottom_other)
             supportFragmentManager.beginTransaction().
             replace(R.id.content_frame, MapFragment()).commit()
         }
