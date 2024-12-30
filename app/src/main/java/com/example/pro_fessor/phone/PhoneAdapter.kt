@@ -115,6 +115,7 @@ class ContactViewHolder(
 )  : RecyclerView.ViewHolder(view) {
     private val nameTextView: TextView = view.findViewById(R.id.phone_component_name)
     private val statusTextView: TextView = view.findViewById(R.id.phone_component_status)
+    private val imageView: ImageView = view.findViewById(R.id.phone_component_image)
     private val callView: ImageView = view.findViewById(R.id.phone_call)
     private val messageView: ImageView = view.findViewById(R.id.phone_message)
     private val infoView: ImageView = view.findViewById(R.id.phone_info)
@@ -136,7 +137,7 @@ class ContactViewHolder(
     ) {
         nameTextView.text = member.name
         statusTextView.text = qualification
-
+        imageView.setImageResource(member.imgPath)
         // View 초기화
 
         frameView.setBackgroundResource(R.color.background)

@@ -40,6 +40,7 @@ class PhoneDetailFragment : Fragment() {
                     }
 
                     //xml 파일 내용
+                    view.findViewById<ImageView>(R.id.phone_detail_image).setImageResource(member.imgPath)
                     view.findViewById<TextView>(R.id.phone_detail_name).text = member.name
                     view.findViewById<TextView>(R.id.phone_detail_qualification).text = cv.qualification
                     view.findViewById<TextView>(R.id.phone_detail_email).text = member.email
