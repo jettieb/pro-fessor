@@ -8,15 +8,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.graphics.Color
 import android.view.Gravity
+import android.widget.Button
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.map.MapFragment
 import com.example.pro_fessor.sampledata.MissionDto
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class MissionAdapter (private val missionDataList: List<MissionDto>,
-                      private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
+                      private val onItemClick: () -> Unit) //람다식으로 인자값 받음
     : RecyclerView.Adapter<MissionAdapter.MissionViewHolder>(){
 
     class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -25,6 +28,7 @@ class MissionAdapter (private val missionDataList: List<MissionDto>,
         val percentTextView: TextView = view.findViewById(R.id.mission_percent)
         val categoryView: ImageView = view.findViewById(R.id.mission_category)
         val progressView: LinearLayout = view.findViewById(R.id.progress_btn)
+        val uploadButton: Button = view.findViewById(R.id.progress_btn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder {
@@ -73,10 +77,10 @@ class MissionAdapter (private val missionDataList: List<MissionDto>,
         holder.percentTextView.text = "달성률\n${data.percent}%"
         holder.percentTextView.setTextColor(Color.parseColor(colorList[data.category]))
 
-//        // 클릭 이벤트 설정
-//        holder.cardView.setOnClickListener {
-//            onItemClick(data.memberId) // 클릭된 아이템의 memberId를 전달
-//        }
+        // 미션 업로드 이벤트 설정
+        holder.uploadButton.setOnClickListener {
+            onItemClick()
+        }
     }
 
     // 아이템 개수 반환
