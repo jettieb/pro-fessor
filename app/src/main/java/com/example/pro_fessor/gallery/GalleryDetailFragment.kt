@@ -8,16 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
+import kotlin.math.abs
 
 @Suppress("DEPRECATION")
 class GalleryDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.gallery_phone_detail, container, false)
+        return inflater.inflate(R.layout.gallery_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +51,12 @@ class GalleryDetailFragment : Fragment() {
                 }
             }
 
-        }
+            val abstractText = member?.abstract
+            val titleText = member?.title
 
+            view.findViewById<TextView>(R.id.gallery_detail_abstract).text = abstractText
+            view.findViewById<TextView>(R.id.gallery_detail_title).text = titleText
+        }
 
     }
 }

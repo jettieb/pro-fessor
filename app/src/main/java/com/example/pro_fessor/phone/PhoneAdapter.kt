@@ -2,88 +2,184 @@ package com.example.pro_fessor.phone
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberDto
 
-class PhoneAdapter (private val memberList: List<MemberDto>,
-                    private val cvList: List<CVDto>,
-                    private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
-    : RecyclerView.Adapter<PhoneAdapter.PhoneViewHolder>(){
-        
-    // 클릭 시 하나의 창만 열릴 수 있도록 이전에 열린 창 저장하는 변수 설정
-    private var previousClick: Int = -1
+sealed class ListItem {
+    data class Header(val title: String) : ListItem()
+    data class Contact(val member: MemberDto, val qualification: String) : ListItem()
+}
 
-    class PhoneViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameTextView: TextView = view.findViewById(R.id.phone_component_name)
-        val statusTextView: TextView = view.findViewById(R.id.phone_component_status)
-        val imageView: ImageView = view.findViewById(R.id.phone_component_image)
-        val cardView: CardView = view.findViewById(R.id.phone)
-        val moreView: LinearLayout = view.findViewById(R.id.phone_component_more)
-        //전화/메세지/정보
-        val callView: ImageView = view.findViewById(R.id.phone_call)
-        val messageView: ImageView = view.findViewById(R.id.phone_message)
-        val infoView: ImageView = view.findViewById(R.id.phone_info)
-    }
-    
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhoneViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.phone_component, parent, false)
-        return PhoneViewHolder(view)
+class PhoneAdapter(private val sectionedList: List<ListItem>,
+                   private val onItemClick: (Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        private const val VIEW_TYPE_HEADER = 0
+        private const val VIEW_TYPE_CONTACT = 1
     }
 
-    // 생성된 뷰홀더에 데이터를 바인딩 - 스크롤 및 이벤트 발생 시 마다 호출됨
-    override fun onBindViewHolder(holder: PhoneViewHolder, position: Int) {
-        val member = memberList[position]
-        val cv = cvList.find{it.memberId == member.memberId}
+    private var previousClick: Int = -1 // 클릭 상태 변수
 
-        if(cv != null){
-            holder.nameTextView.text = member.name
-            holder.statusTextView.text = cv.qualification
-            //TODO: image는 임의로 example_mask로 넣어둠.
-            holder.imageView.setImageResource(R.drawable.example_mask)
+    override fun getItemViewType(position: Int): Int {
+        return when (sectionedList[position]) {
+            is ListItem.Header -> VIEW_TYPE_HEADER
+            is ListItem.Contact -> VIEW_TYPE_CONTACT
+        }
+    }
 
-            // 현재 아이템이 상태 확인
-            holder.moreView.visibility = if (position == previousClick) View.VISIBLE else View.GONE
-            holder.cardView.setOnClickListener {
-                // 이전에 열렸던 창이 있으면 닫음
-                if (previousClick != -1 && previousClick != position) {
-                    notifyItemChanged(previousClick)
-                }
-                // 동일한 아이템 클릭 시 닫기
-                // 다른 아이템 클릭 시 previousClick 변수 설정
-                previousClick = if (position == previousClick) -1 else position
-                notifyItemChanged(position)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            VIEW_TYPE_HEADER -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_section_header, parent, false)
+                HeaderViewHolder(view)
             }
+            VIEW_TYPE_CONTACT -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.phone_component, parent, false)
+                ContactViewHolder(view) // onItemClick 전달
+            }
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+    }
 
-            // 전화 걸기
-            holder.callView.setOnClickListener{
-                val intent = Intent(Intent.ACTION_DIAL).apply {
-                    data = Uri.parse("tel:" + member.phone)
-                }
-                holder.itemView.context.startActivity(intent)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = sectionedList[position]) {
+            is ListItem.Header -> {
+                Log.d("PhoneAdapter", "Binding Header: ${item.title}")
+
+                (holder as HeaderViewHolder).bind(item)
             }
-            // 메세지 보내기
-            holder.messageView.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("smsto:" + member.phone)
-                }
-                holder.itemView.context.startActivity(intent)
-            }
-            // 정보 보기
-            holder.infoView.setOnClickListener {
-                onItemClick(member.memberId)
+            is ListItem.Contact -> {
+
+                val isExpanded = position == previousClick
+                val isFirstInSection = position > 0 && sectionedList[position - 1] is ListItem.Header
+                val isLastInSection = position < sectionedList.size - 1 && sectionedList[position + 1] is ListItem.Header
+                Log.d("hello", isFirstInSection.toString())
+                Log.d("hello", isLastInSection.toString())
+                Log.d("hello", isExpanded.toString())
+                Log.d("hello", position.toString())
+                Log.d("hello", previousClick.toString())
+                (holder as ContactViewHolder).bind(
+                    item.member, item.qualification, onItemClick, isExpanded, onCardClick = {
+                        clickedPosition ->
+                    if (previousClick != -1 && previousClick != clickedPosition) {
+                        notifyItemChanged(previousClick)
+                    }
+                    previousClick = if (previousClick == clickedPosition) -1 else clickedPosition
+                    notifyItemChanged(clickedPosition)
+                },
+                    isFirstInSection = isFirstInSection,
+                    isLastInSection = isLastInSection
+                )
+
             }
         }
     }
-    
-    override fun getItemCount(): Int = memberList.size
+
+    override fun getItemCount(): Int {
+        // Log.d("PhoneAdapter", "ItemCount: ${sectionedList.size}")
+
+        return sectionedList.size
+    }
 }
+
+class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private val headerTextView: TextView = view.findViewById(R.id.headerTextView)
+
+    fun bind(header: ListItem.Header) {
+        headerTextView.text = header.title
+    }
+}
+@Suppress("DEPRECATION")
+class ContactViewHolder(
+    view: View,
+)  : RecyclerView.ViewHolder(view) {
+    private val nameTextView: TextView = view.findViewById(R.id.phone_component_name)
+    private val statusTextView: TextView = view.findViewById(R.id.phone_component_status)
+    private val callView: ImageView = view.findViewById(R.id.phone_call)
+    private val messageView: ImageView = view.findViewById(R.id.phone_message)
+    private val infoView: ImageView = view.findViewById(R.id.phone_info)
+    private val moreView: LinearLayout = view.findViewById(R.id.phone_component_more)
+    private val cardView: CardView = view.findViewById(R.id.phone)
+    private val frameView: FrameLayout = view.findViewById(R.id.phone_frame)
+    private val lineView: View = view.findViewById(R.id.linetop)
+
+    fun bind(
+        member: MemberDto,
+        qualification: String,
+        onItemClick: (Int) -> Unit,
+        isExpanded: Boolean,
+        onCardClick: (Int) -> Unit,
+        isFirstInSection: Boolean,
+        isLastInSection: Boolean
+    ) {
+        nameTextView.text = member.name
+        statusTextView.text = qualification
+
+
+        // View 초기화
+        frameView.setBackgroundResource(0) // 기존 배경 제거
+        cardView.setCardBackgroundColor(cardView.context.getColor(R.color.white)) // 기본 색상
+        lineView.visibility = View.GONE // 기본적으로 숨김 처리
+
+        when {
+            isFirstInSection -> {
+                frameView.setBackgroundResource(R.drawable.rounded_card_background)
+                lineView.visibility = View.GONE
+            }
+            isLastInSection -> {
+                frameView.setBackgroundResource(R.drawable.rounded_card_background_bottom)
+                lineView.visibility = View.VISIBLE
+            }
+            else -> {
+                Log.d("hello", "It is in the middle")
+                cardView.setCardBackgroundColor(cardView.context.getColor(R.color.black))
+                lineView.visibility = View.VISIBLE
+            }
+        }
+
+        // "더보기" 상태 반영
+        moreView.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+        cardView.setOnClickListener {
+            onCardClick(adapterPosition) // 클릭된 위치 전달
+        }
+
+        // 전화 걸기
+        callView.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:${member.phone}")
+            }
+            it.context.startActivity(intent)
+        }
+
+        // 메시지 보내기
+        messageView.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("smsto:${member.phone}")
+            }
+            it.context.startActivity(intent)
+        }
+
+        // 정보 보기
+        infoView.setOnClickListener {
+            onItemClick(member.memberId)
+        }
+    }
+}
+
+

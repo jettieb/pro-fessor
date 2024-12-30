@@ -31,7 +31,7 @@ class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>,
         val data = dataList[position]
         holder.imageGroupTitle.text = data.title
         holder.imageGroupCount.text = data.count.toString()
-        holder.imageGroupView.setImageResource(R.drawable.img)
+        holder.imageGroupView.setImageResource(R.drawable.img_3)
         holder.cardView.setOnClickListener {
             onItemClick(data.memberId)
         }

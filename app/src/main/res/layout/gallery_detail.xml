@@ -31,7 +31,7 @@
 
             <!--이름-->
             <TextView
-                android:id="@+id/phone_component_name"
+                android:id="@+id/gallery_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
@@ -42,7 +42,7 @@
 
             <!--학석박-->
             <TextView
-                android:id="@+id/phone_component_status"
+                android:id="@+id/gallery_detail_abstract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
