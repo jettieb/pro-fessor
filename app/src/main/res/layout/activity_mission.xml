@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/layout_button_background"
                 android:orientation="horizontal"
+                android:layout_gravity="start"
                 android:padding="2dp">
             </LinearLayout>
 
