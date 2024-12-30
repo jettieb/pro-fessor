@@ -15,6 +15,7 @@ import android.graphics.Camera
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.pro_fessor.map.MapFragment
 
 
 @Suppress("DEPRECATION")
@@ -48,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         otherButton.setOnClickListener {
-            // other 버튼 라우팅
+            supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, MapFragment()).commit()
         }
     }
 }
