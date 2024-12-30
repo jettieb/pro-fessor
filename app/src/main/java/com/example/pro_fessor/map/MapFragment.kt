@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.NaverMap
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+
 
 @Suppress("DEPRECATION")
 class MapFragment : Fragment() {
-    private var permissions = arrayOf(
-        android.Manifest.permission.ACCESS_FINE_LOCATION,
-        android.Manifest.permission.ACCESS_COARSE_LOCATION
-    )
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private var isMapInitialized = false // 지도 초기화 여부를 체크하기 위한 플래그
@@ -28,6 +28,8 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val lat : Double = arguments?.getDouble("lat") ?: -1.0 //위도
+        val lng : Double = arguments?.getDouble("lng") ?: -1.0 //
 
         // 상단바 이름 변경
         view.findViewById<TextView>(R.id.top_bar_text).text = "지도"
@@ -50,6 +52,11 @@ class MapFragment : Fragment() {
                 this.naverMap = naverMap
                 this.isMapInitialized = true // 지도 초기화 완료
                 setupMap(naverMap)
+
+                if(lat != -1.0 && lng != -1.0){
+                    val marker = Marker()
+                    setMarker(marker, lat, lng);
+                }
             }
         }
     }
@@ -73,5 +80,16 @@ class MapFragment : Fragment() {
         if (requestCode == 1000) {
             locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    //마커 표시
+    private fun setMarker(marker: Marker, lat: Double, lng: Double) {
+        marker.isIconPerspectiveEnabled = true
+        //아이콘 지정
+        marker.icon = OverlayImage.fromResource(R.drawable.map_pin)
+        marker.position = LatLng(lat, lng)
+        marker.zIndex = 10
+        //마커 표시
+        marker.map = naverMap
     }
 }

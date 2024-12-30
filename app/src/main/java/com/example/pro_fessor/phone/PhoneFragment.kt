@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.map.MapFragment
 import com.example.pro_fessor.phone.ListItem
 import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
@@ -28,17 +29,19 @@ class PhoneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.phone_recycler_view)
-        val phoneDataList: List<MemberDto> = MemberData.getPhoneDataList()
+        val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
         val cvDataList: List<CVDto> = CVData.getCVDataList()
 
         // 섹션화된 데이터 준비
-        val sectionedList = prepareSectionedList(phoneDataList, cvDataList)
+
+        val sectionedList = prepareSectionedList(memberDataList, cvDataList)
+
 
         // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
         Log.d("hi", sectionedList.toString())
-        recyclerView.adapter = PhoneAdapter(sectionedList) { id ->
-            // 클릭 이벤트 처리
+        recyclerView.adapter = PhoneAdapter(sectionedList, { id ->
+            // onItemClick 이벤트 처리
             val fragment = PhoneDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
@@ -49,7 +52,25 @@ class PhoneFragment : Fragment() {
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
                 .commit()
-        }
+        }, { id ->
+            // onLocationClick 이벤트 처리
+            val member = memberDataList.find { it.memberId == id }
+
+            if(member != null){
+                val fragment = MapFragment().apply {
+                    arguments = Bundle().apply {
+                        putDouble("lat", member.lat)
+                        putDouble("lng", member.lng)
+                    }
+                }
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        })
+
     }
 
 
