@@ -14,7 +14,5 @@
     <color name="background2">#FCFCFE</color>
     <color name="mint">#8DD8DE</color>
     <color name="gray">#EBEBEB</color>
-    <!-- res/values/colors.xml -->
-    <color name="transparent">#00000000</color>
 
 </resources>

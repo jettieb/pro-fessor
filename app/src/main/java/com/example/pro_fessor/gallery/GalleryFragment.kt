@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.core.app.ActivityCompat
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData.getGalleryDataList
 import com.example.pro_fessor.sampledata.GalleryGroupData
@@ -54,7 +56,15 @@ class GalleryFragment : Fragment() {
 
         val cameraButton = view.findViewById<Button>(R.id.fixed_button)
 
-        recyclerView.layoutManager = GridLayoutManager(activity, 2)  // 아이템 세로로 나열
+        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
+        searchButton.visibility = View.GONE
+        val layoutManager = StaggeredGridLayoutManager(
+            2, StaggeredGridLayoutManager.VERTICAL
+        )
+        recyclerView.layoutManager = layoutManager
+
+
+
         galleryAdapter = GalleryAdapter(context = requireContext(),
             dataList = getGalleryDataList().filter { it.date == "2024-12-29" }.toMutableList()) { id ->
             val fragment = GalleryDetailFragment().apply {

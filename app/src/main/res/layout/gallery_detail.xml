@@ -27,7 +27,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:scaleType="fitStart"
-                android:src="@drawable/img"/>
+                android:src="@drawable/img_20"/>
 
             <!--이름-->
             <TextView

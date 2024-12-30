@@ -19,7 +19,7 @@ import com.example.pro_fessor.sampledata.GalleryGroupData
 class GalleryAdapter (private val context: Context,
                       private var dataList: MutableList<GalleryDto>,
                       private val onItemClick: (Int) -> Unit) :
-    RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>(){
+    RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
     class GalleryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.gallery_component_image)
@@ -34,28 +34,51 @@ class GalleryAdapter (private val context: Context,
 
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
         val data = dataList[position]
-        if (data.image == -1) {
-            data.imagePath?.let { path ->
-                try {
-                    val bitmap = if (path.startsWith("content://")) {
-                        val inputStream = context.contentResolver.openInputStream(Uri.parse(path))
-                        BitmapFactory.decodeStream(inputStream)
-                    } else {
-                        BitmapFactory.decodeFile(path)
+        try {
+            if (data.image == -1) { // 이미지 리소스 ID가 없는 경우
+                data.imagePath?.let { path ->
+                    val bitmap = when {
+                        path.startsWith("content://") -> {
+                            context.contentResolver.openInputStream(Uri.parse(path))
+                                ?.use { inputStream ->
+                                    BitmapFactory.decodeStream(inputStream)
+                                }
+                        }
+
+                        path.isNotEmpty() -> {
+                            BitmapFactory.decodeFile(path)
+                        }
+
+                        else -> null
                     }
-                    holder.imageView.setImageBitmap(bitmap)
-                } catch (e: Exception) {
-                    Log.e("GalleryAdapter", "Error decoding image: ${e.localizedMessage}")
+                    if (bitmap != null) {
+                        // 비율 유지하며 ImageView 크기 동적 조정
+                        val aspectRatio = bitmap.width.toFloat() / bitmap.height
+                        holder.imageView.layoutParams = holder.imageView.layoutParams.apply {
+                            width =
+                                holder.imageView.resources.displayMetrics.widthPixels / 2 // 열 너비 조정
+                            height = (width / aspectRatio).toInt()
+                        }
+                        holder.imageView.setImageBitmap(bitmap)
+                    } else {
+                        holder.imageView.setImageResource(R.drawable.example_mask) // 기본 이미지 설정
+                    }
+                } ?: run {
+                    holder.imageView.setImageResource(R.drawable.example_mask) // 기본 이미지 설정
                 }
+            } else { // 이미지 리소스 ID가 있는 경우
+                holder.imageView.setImageResource(data.image)
             }
+        } catch (e: Exception) {
+            Log.e("GalleryAdapter", "Error decoding image: ${e.localizedMessage}")
+            holder.imageView.setImageResource(R.drawable.example_mask) // 오류 시 기본 이미지 설정
         }
-        else {
-            holder.imageView.setImageResource(data.image)
-        }
+
         holder.cardView.setOnClickListener {
             onItemClick(data.memberId)
         }
     }
+
 
     override fun getItemCount(): Int = dataList.size
 

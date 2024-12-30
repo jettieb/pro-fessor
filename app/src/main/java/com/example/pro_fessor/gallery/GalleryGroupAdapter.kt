@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.sampledata.GalleryData.getGalleryDataList
 import com.example.pro_fessor.sampledata.GalleryGroupDto
 
 class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>,
@@ -31,7 +32,12 @@ class GalleryGroupAdapter (private val dataList: List<GalleryGroupDto>,
         val data = dataList[position]
         holder.imageGroupTitle.text = data.title
         holder.imageGroupCount.text = data.count.toString()
-        holder.imageGroupView.setImageResource(R.drawable.img_3)
+        val date = data.title
+        for (l in getGalleryDataList()) {
+            if (l.date == date && l.image != -1) {
+                holder.imageGroupView.setImageResource(l.image)
+            }
+        }
         holder.cardView.setOnClickListener {
             onItemClick(data.memberId)
         }

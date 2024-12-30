@@ -117,7 +117,6 @@ class PhoneSearchFragment : Fragment() {
                 }
             }
         }
-
         adapter.updateData(filteredList)
     }
 
