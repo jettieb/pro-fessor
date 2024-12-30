@@ -59,6 +59,7 @@ class PhoneFragment : Fragment() {
                     arguments = Bundle().apply {
                         putDouble("lat", member.lat)
                         putDouble("lng", member.lng)
+                        putString("name", member.name)
                     }
                 }
 
