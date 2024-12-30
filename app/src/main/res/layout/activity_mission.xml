@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background2"
-        android:orientation="vertical"
-        android:paddingBottom="70dp">
+        android:background="@color/background"
+        android:orientation="vertical">
 
         <include
             layout="@layout/top_bar" />
@@ -66,25 +66,29 @@
             </LinearLayout>
         </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/phone_recycler_view"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background" />
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mission_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background" />
+
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/button_background"
+                android:text="추가하기"
+                android:textColor="@color/main_color2"
+                android:fontFamily="@font/pretendard_semibold"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="16sp" />
+
+        </FrameLayout>
     </LinearLayout>
-
-    <!-- 추가하기 버튼 -->
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/button_background"
-        android:text="추가하기"
-        android:textColor="@color/main_color2"
-        android:fontFamily="@font/pretendard_semibold"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="16sp" />
-</FrameLayout>
+</LinearLayout>
