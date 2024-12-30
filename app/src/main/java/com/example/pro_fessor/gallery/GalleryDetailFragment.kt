@@ -25,6 +25,12 @@ class GalleryDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
+        backArrow.visibility = View.VISIBLE
+        backArrow.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         val memberId = arguments?.getInt("id") ?: -1
         if (memberId != -1){
             val memberDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
