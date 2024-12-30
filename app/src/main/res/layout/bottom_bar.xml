@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:background="#F6F6F6"
-    android:weightSum="3"
+    android:weightSum="4"
     android:paddingBottom="4dp"
     android:paddingTop="5dp">
 
@@ -79,6 +79,30 @@
         android:layout_gravity="center"
         android:text="위치"
         android:textSize="9dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="1dp">
+
+        <ImageButton
+            android:id="@+id/mission_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F6F6F6"
+            android:src="@drawable/bottom_mission"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="도전미션"
+            android:textSize="9dp"/>
     </LinearLayout>
 
 </LinearLayout>

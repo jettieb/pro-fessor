@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background2"
+        android:orientation="vertical"
+        android:paddingBottom="70dp">
+
+        <include
+            layout="@layout/top_bar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_background"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+            <!-- 오른쪽으로 옮기려면 layout_gravity="end"로 설정 -->
+            <LinearLayout
+                android:id="@+id/progress_btn"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_button_background"
+                android:orientation="horizontal"
+                android:padding="2dp">
+            </LinearLayout>
+
+            <!-- 텍스트 버튼 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- 진행 중 -->
+                <TextView
+                    android:id="@+id/btn_in_progress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:text="진행 중"
+                    android:textColor="@color/white" />
+
+                <!-- 진행 완료 -->
+                <TextView
+                    android:id="@+id/btn_completed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingVertical="10dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:textSize="16sp"
+                    android:text="진행 완료"
+                    android:textColor="@color/main_color2" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/phone_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background" />
+
+    </LinearLayout>
+
+    <!-- 추가하기 버튼 -->
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/button_background"
+        android:text="추가하기"
+        android:textColor="@color/main_color2"
+        android:fontFamily="@font/pretendard_semibold"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp" />
+</FrameLayout>
