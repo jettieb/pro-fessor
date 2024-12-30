@@ -23,7 +23,8 @@ sealed class ListItem {
 }
 
 class PhoneAdapter(private val sectionedList: List<ListItem>,
-                   private val onItemClick: (Int) -> Unit
+                   private val onItemClick: (Int) -> Unit,
+                   private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -74,7 +75,7 @@ class PhoneAdapter(private val sectionedList: List<ListItem>,
                 Log.d("hello", position.toString())
                 Log.d("hello", previousClick.toString())
                 (holder as ContactViewHolder).bind(
-                    item.member, item.qualification, onItemClick, isExpanded, onCardClick = {
+                    item.member, item.qualification, onItemClick, onLocationClick, isExpanded, onCardClick = {
                         clickedPosition ->
                     if (previousClick != -1 && previousClick != clickedPosition) {
                         notifyItemChanged(previousClick)
@@ -113,6 +114,7 @@ class ContactViewHolder(
     private val callView: ImageView = view.findViewById(R.id.phone_call)
     private val messageView: ImageView = view.findViewById(R.id.phone_message)
     private val infoView: ImageView = view.findViewById(R.id.phone_info)
+    private val locationView: ImageView = view.findViewById(R.id.phone_location)
     private val moreView: LinearLayout = view.findViewById(R.id.phone_component_more)
     private val cardView: CardView = view.findViewById(R.id.phone)
     private val frameView: FrameLayout = view.findViewById(R.id.phone_frame)
@@ -122,6 +124,7 @@ class ContactViewHolder(
         member: MemberDto,
         qualification: String,
         onItemClick: (Int) -> Unit,
+        onLocationClick: (Int) -> Unit,
         isExpanded: Boolean,
         onCardClick: (Int) -> Unit,
         isFirstInSection: Boolean,
@@ -166,7 +169,6 @@ class ContactViewHolder(
             }
             it.context.startActivity(intent)
         }
-
         // 메시지 보내기
         messageView.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -174,10 +176,13 @@ class ContactViewHolder(
             }
             it.context.startActivity(intent)
         }
-
         // 정보 보기
         infoView.setOnClickListener {
             onItemClick(member.memberId)
+        }
+        // 위치 보기
+        locationView.setOnClickListener {
+            onLocationClick(member.memberId)
         }
     }
 }
