@@ -13,6 +13,8 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import android.graphics.Bitmap
+import android.graphics.Canvas
 
 
 @Suppress("DEPRECATION")
@@ -29,7 +31,8 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val lat : Double = arguments?.getDouble("lat") ?: -1.0 //위도
-        val lng : Double = arguments?.getDouble("lng") ?: -1.0 //
+        val lng : Double = arguments?.getDouble("lng") ?: -1.0 //경도
+        val name : String = arguments?.getString("name") ?: "" //경도
 
         // 상단바 이름 변경
         view.findViewById<TextView>(R.id.top_bar_text).text = "지도"
@@ -53,9 +56,9 @@ class MapFragment : Fragment() {
                 this.isMapInitialized = true // 지도 초기화 완료
                 setupMap(naverMap)
 
-                if(lat != -1.0 && lng != -1.0){
+                if(lat != -1.0 && lng != -1.0 && name != ""){
                     val marker = Marker()
-                    setMarker(marker, lat, lng);
+                    setMarker(marker, lat, lng, name);
                 }
             }
         }
@@ -83,13 +86,36 @@ class MapFragment : Fragment() {
     }
 
     //마커 표시
-    private fun setMarker(marker: Marker, lat: Double, lng: Double) {
+    private fun setMarker(marker: Marker, lat: Double, lng: Double, name: String) {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.map_pin, null)
+
+        // 텍스트 설정
+        val textView = view.findViewById<TextView>(R.id.pin_name)
+        textView.text = name
+
+        // 뷰를 Bitmap으로 변환
+        val bitmap = createBitmapFromView(view)
+
         marker.isIconPerspectiveEnabled = true
         //아이콘 지정
-        marker.icon = OverlayImage.fromResource(R.drawable.map_pin)
+        marker.icon = OverlayImage.fromBitmap(bitmap)
         marker.position = LatLng(lat, lng)
         marker.zIndex = 10
+
         //마커 표시
         marker.map = naverMap
+    }
+
+    private fun createBitmapFromView(view: View): Bitmap {
+        view.measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+        val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
     }
 }
