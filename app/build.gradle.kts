@@ -63,4 +63,5 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     // 네이버 지도 SDK
     implementation("com.naver.maps:map-sdk:3.20.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
