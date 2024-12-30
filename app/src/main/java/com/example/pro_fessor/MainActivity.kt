@@ -14,9 +14,11 @@ import com.example.pro_fessor.gallery.PhoneFragment
 import android.graphics.Camera
 import android.net.Uri
 import android.widget.LinearLayout
+import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.pro_fessor.map.MapFragment
+import com.example.pro_fessor.mission.MissionFragment
 
 
 @Suppress("DEPRECATION")
@@ -40,12 +42,14 @@ class MainActivity : AppCompatActivity() {
         val phoneButton = findViewById<ImageButton>(R.id.phone_button)
         val imageButton = findViewById<ImageButton>(R.id.image_button)
         val otherButton = findViewById<ImageButton>(R.id.other_button)
+        val missionButton = findViewById<ImageButton>(R.id.mission_button)
 
         phoneLayout.setOnClickListener {
             Log.d("Button","button clicked")
             phoneButton.setImageResource(R.drawable.bottom_phone)
             imageButton.setImageResource(R.drawable.bottom_image_unselected)
             otherButton.setImageResource(R.drawable.bottom_other_unselected)
+            missionButton.setImageResource(R.drawable.bottom_mission_unselected)
             supportFragmentManager.beginTransaction().
                 replace(R.id.content_frame, PhoneFragment()).commit()
         }
@@ -69,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
             imageButton.setImageResource(R.drawable.bottom_image)
             otherButton.setImageResource(R.drawable.bottom_other_unselected)
+            missionButton.setImageResource(R.drawable.bottom_mission_unselected)
             supportFragmentManager.beginTransaction().
             replace(R.id.content_frame, GalleryFragment()).commit()
         }
@@ -84,8 +89,18 @@ class MainActivity : AppCompatActivity() {
             phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
             imageButton.setImageResource(R.drawable.bottom_image_unselected)
             otherButton.setImageResource(R.drawable.bottom_other)
+            missionButton.setImageResource(R.drawable.bottom_mission_unselected)
             supportFragmentManager.beginTransaction().
             replace(R.id.content_frame, MapFragment()).commit()
+        }
+
+        missionButton.setOnClickListener {
+            phoneButton.setImageResource(R.drawable.bottom_phone_unselected)
+            imageButton.setImageResource(R.drawable.bottom_image_unselected)
+            otherButton.setImageResource(R.drawable.bottom_other_unselected)
+            missionButton.setImageResource(R.drawable.bottom_mission)
+            supportFragmentManager.beginTransaction().
+            replace(R.id.content_frame, MissionFragment()).commit()
         }
     }
 }
