@@ -25,6 +25,7 @@ import androidx.cardview.widget.CardView
 import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
+import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 
 
@@ -76,7 +77,9 @@ class MapFragment : Fragment() {
                     }
 
                     // 카메라 업데이트: 특정 핀으로 이동
+                    naverMap.locationTrackingMode = LocationTrackingMode.None
                     val cameraUpdate = CameraUpdate.scrollTo(marker.position)
+                        .animate(CameraAnimation.Easing)
                     naverMap.moveCamera(cameraUpdate)
                 }
             }
@@ -119,6 +122,7 @@ class MapFragment : Fragment() {
 
         if(member != null && cv != null){
             imageView.setImageResource(member.imgPath)
+            imageView.setBackgroundResource(R.drawable.circle)
             nameText.text = member.name
             statusText.text = cv.qualification
         }
