@@ -16,7 +16,16 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapShader
 import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.Shader
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
@@ -121,18 +130,18 @@ class MapFragment : Fragment() {
         val statusText : TextView = view.findViewById(R.id.phone_component_status)
 
         if(member != null && cv != null){
-            imageView.setImageResource(member.imgPath)
+            imageView.setImageResource(0)
             imageView.setBackgroundResource(R.drawable.circle)
             nameText.text = member.name
             statusText.text = cv.qualification
         }
-
-        // 뷰를 Bitmap으로 변환
+        val circularBitmap = getCircularBitmapFromResource(member.imgPath, requireContext())
         val bitmap = createBitmapFromView(view)
+        val newBitmap = overlayBitmap(bitmap, circularBitmap)
 
         marker.isIconPerspectiveEnabled = true
         //아이콘 지정
-        marker.icon = OverlayImage.fromBitmap(bitmap)
+        marker.icon = OverlayImage.fromBitmap(newBitmap)
         marker.position = LatLng(lat, lng)
         marker.zIndex = 10
 
@@ -156,6 +165,55 @@ class MapFragment : Fragment() {
         view.draw(canvas)
         return bitmap
     }
+
+    fun getCircularBitmapFromResource(resourceId: Int, context: Context): Bitmap {
+        // 리소스에서 Bitmap 생성
+        val originalBitmap = BitmapFactory.decodeResource(context.resources, resourceId)
+
+        // 원형 Bitmap 생성
+        val size = minOf(originalBitmap.width, originalBitmap.height)
+        val circularBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+
+        val canvas = Canvas(circularBitmap)
+        val paint = Paint().apply {
+            isAntiAlias = true // 부드럽게 처리
+        }
+
+        val rect = Rect(0, 0, size, size)
+        val rectF = RectF(rect)
+
+        // 원형 클립 적용
+        canvas.drawOval(rectF, paint)
+        paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+        canvas.drawBitmap(originalBitmap, rect, rect, paint)
+
+        return Bitmap.createScaledBitmap(circularBitmap, 100, 100, true)
+
+    }
+
+    fun overlayBitmap(baseBitmap: Bitmap, overlayBitmap: Bitmap): Bitmap {
+        // 결과 비트맵 생성 (기본 비트맵 크기를 기준으로)
+        val resultBitmap = Bitmap.createBitmap(baseBitmap.width, baseBitmap.height, Bitmap.Config.ARGB_8888)
+
+        // 캔버스를 사용해 두 비트맵을 겹침
+        val canvas = Canvas(resultBitmap)
+        val paint = Paint().apply { isAntiAlias = true }
+
+        // 기본 비트맵 그리기
+        canvas.drawBitmap(baseBitmap, 0f, 0f, paint)
+
+        // 오버레이 비트맵의 중앙 정렬 (기본 비트맵 기준)
+        val left = (baseBitmap.width - overlayBitmap.width) / 2f - 180
+        val top = (baseBitmap.height - overlayBitmap.height) / 2f - 65
+        canvas.drawBitmap(overlayBitmap, left, top, paint)
+
+        return resultBitmap
+    }
+
+
+
+
+
 
     private fun callPhoneNumber(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL).apply {

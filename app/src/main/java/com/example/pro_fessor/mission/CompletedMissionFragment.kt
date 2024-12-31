@@ -158,7 +158,7 @@ class CompletedMissionFragment : Fragment() {
         }
         requireActivity().supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-            .replace(R.id.content_frame, previousFragment)
+            .replace(R.id.inner_content_frame, previousFragment)
             .addToBackStack(null)
             .commit()
     }

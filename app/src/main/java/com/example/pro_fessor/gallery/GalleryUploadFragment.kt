@@ -1,12 +1,17 @@
 package com.example.pro_fessor.gallery
 
+import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -29,11 +34,35 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val botbar = requireActivity().findViewById<View>(R.id.botbar)
+
+        val abstractEditText: EditText = view.findViewById(R.id.abstractEditText)
+
+        abstractEditText.requestFocus() // 포커스 설정
+
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(abstractEditText, InputMethodManager.SHOW_IMPLICIT) // 키보드 표시
+        val rootView = requireActivity().findViewById<View>(android.R.id.content)
+        rootView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            private var isKeyboardVisible = false // 키보드 상태를 추적하기 위한 변수
+
+            override fun onGlobalLayout() {
+                val rect = Rect()
+                rootView.getWindowVisibleDisplayFrame(rect)
+                val screenHeight = rootView.height
+                val keypadHeight = screenHeight - rect.bottom
+
+                Log.d("KeypadHeight", "Keypad: $keypadHeight, Screen: $screenHeight")
+                if (screenHeight < 1400) botbar.visibility = View.GONE
+                else botbar.visibility = View.VISIBLE
+            }
+        })
+
+
+
 
         val imagePath = arguments?.getString("imagePath")
         val titleEditText = view.findViewById<EditText>(R.id.titleEditText)
-        val abstractEditText = view.findViewById<EditText>(R.id.abstractEditText)
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
         val uploadButton = view.findViewById<Button>(R.id.uploadButton)
 
         imagePath?.let { path ->
@@ -75,5 +104,30 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
             Toast.makeText(requireContext(), "업로드 완료!", Toast.LENGTH_SHORT).show()
             requireActivity().supportFragmentManager.popBackStack()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
+        val botbar = requireActivity().findViewById<View>(R.id.botbar)
+        botbar.visibility = if (isKeyboardVisible()) View.GONE else View.VISIBLE
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // botbar을 다시 VISIBLE로 설정
+        val botbar = requireActivity().findViewById<View>(R.id.botbar)
+        botbar.visibility = View.VISIBLE
+    }
+
+    fun isKeyboardVisible(): Boolean {
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        return inputMethodManager.isAcceptingText
     }
 }
