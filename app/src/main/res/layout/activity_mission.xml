@@ -28,7 +28,9 @@
                 android:background="@drawable/layout_button_background"
                 android:orientation="horizontal"
                 android:layout_gravity="start"
-                android:padding="2dp">
+                android:padding="2dp"
+                android:clickable="true"
+                android:focusable="true">
             </LinearLayout>
 
             <!-- 텍스트 버튼 -->
@@ -43,13 +45,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:clickable="true"
                     android:gravity="center"
-                    android:paddingVertical="10dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:textSize="16sp"
                     android:text="진행 중"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
                 <!-- 진행 완료 -->
                 <TextView
@@ -57,13 +59,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:clickable="true"
                     android:gravity="center"
                     android:paddingVertical="10dp"
                     android:fontFamily="@font/pretendard_semibold"
                     android:textSize="16sp"
                     android:text="진행 완료"
-                    android:textColor="@color/main_color2" />
+                    android:textColor="@color/main_color2"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </LinearLayout>
         </FrameLayout>
 
