@@ -19,7 +19,8 @@
         <!--제목-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -27,26 +28,219 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:paddingBottom="5dp"
-                android:textColor="@color/font_color"
+                android:paddingBottom="7dp"
+                android:textColor="@color/black"
                 android:fontFamily="@font/pretendard_medium"
                 android:text="제목" />
 
             <EditText
-                android:id="@+id/titleEditText"
+                android:id="@+id/mission_titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
-                android:autofillHints="제목"
+                android:hint="제목"
                 android:inputType="textMultiLine"
                 android:layout_marginHorizontal="5dp"
-                android:text="제목"
                 android:paddingHorizontal="20dp"
                 android:textSize="15sp"
                 android:lineSpacingExtra="1dp"
                 android:background="@drawable/edit_text_layout"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/pretendard_regular"
-                android:textColor="#B9B9B9" />
+                android:textColorHint="#B9B9B9" />
         </LinearLayout>
+
+        <!--인증 기간-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:paddingBottom="7dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="인증기간" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--시작시간-->
+                <FrameLayout
+                    android:id="@+id/mission_start_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:background="@drawable/edit_text_layout"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/mission_start_date_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:textSize="15sp"
+                        android:textColor="#B9B9B9"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="시작 날짜" />
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@drawable/calendar" />
+                </FrameLayout>
+
+                <!--종료시간-->
+                <FrameLayout
+                    android:id="@+id/mission_end_date"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="33dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:paddingHorizontal="20dp"
+                    android:background="@drawable/edit_text_layout"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/mission_end_date_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:textSize="15sp"
+                        android:textColor="#B9B9B9"
+                        android:fontFamily="@font/pretendard_regular"
+                        android:text="종료 날짜" />
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:src="@drawable/calendar" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--이모티콘 선택-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:paddingBottom="7dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="이모티콘 선택" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="5"
+                android:rowCount="2">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_1"/>
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_2"/>
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_3"/>
+
+                <ImageView
+                    android:id="@+id/image4"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_4"/>
+
+                <ImageView
+                    android:id="@+id/image5"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_5"/>
+
+                <ImageView
+                    android:id="@+id/image6"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_6"/>
+
+                <ImageView
+                    android:id="@+id/image7"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_7"/>
+
+                <ImageView
+                    android:id="@+id/image8"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_8"/>
+
+                <ImageView
+                    android:id="@+id/image9"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_9"/>
+
+                <ImageView
+                    android:id="@+id/image10"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="7dp"
+                    android:src="@drawable/mission_10"/>
+
+            </GridLayout>
+        </LinearLayout>
+
+        <!--추가하기 버튼-->
+        <Button
+            android:id="@+id/mission_submit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/layout_button_background"
+            android:orientation="horizontal"
+            android:layout_gravity="start"
+            android:text="추가하기"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="17dp"
+            android:padding="2dp"/>
     </LinearLayout>
 </LinearLayout>

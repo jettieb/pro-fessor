@@ -3,6 +3,7 @@ package com.example.pro_fessor.sampledata
 import java.time.LocalDate
 
 data class MissionDto (
+    val id: Int,
     val name: String,
     val startDate: LocalDate,
     val endDate: LocalDate,
