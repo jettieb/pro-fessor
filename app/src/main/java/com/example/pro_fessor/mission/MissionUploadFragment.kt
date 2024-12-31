@@ -33,6 +33,8 @@ class MissionUploadFragment() : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
+        topBarTextView.text = "도전 과제"
 
         //date picker
         val startDateFrame: FrameLayout = view.findViewById(R.id.mission_start_date)

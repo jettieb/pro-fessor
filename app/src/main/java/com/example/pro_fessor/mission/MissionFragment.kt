@@ -30,7 +30,7 @@ class MissionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
-        topBarTextView.text = "미션 과제"
+        topBarTextView.text = "도전 과제"
 
         val recyclerView: RecyclerView = view.findViewById(R.id.mission_recycler_view)
         val missionList: List<MissionDto> = MissionData.getMissionDataList()
