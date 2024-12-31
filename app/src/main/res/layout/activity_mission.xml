@@ -23,7 +23,7 @@
             <!-- 오른쪽으로 옮기려면 layout_gravity="end"로 설정 -->
             <LinearLayout
                 android:id="@+id/progress_btn"
-                android:layout_width="190dp"
+                android:layout_width="170dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/layout_button_background"
                 android:orientation="horizontal"
