@@ -71,26 +71,21 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/inner_content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mission_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background" />
 
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="bottom|end"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background"
+                android:fontFamily="@font/pretendard_semibold"
                 android:text="추가하기"
                 android:textColor="@color/main_color2"
-                android:fontFamily="@font/pretendard_semibold"
-                android:layout_marginBottom="20dp"
-                android:layout_marginRight="20dp"
                 android:textSize="16sp" />
 
         </FrameLayout>

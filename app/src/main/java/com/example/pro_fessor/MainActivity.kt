@@ -18,6 +18,7 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.pro_fessor.map.MapFragment
+import com.example.pro_fessor.mission.MainFragment
 import com.example.pro_fessor.mission.MissionFragment
 
 
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             otherButton.setImageResource(R.drawable.bottom_other_unselected)
             missionButton.setImageResource(R.drawable.bottom_mission)
             supportFragmentManager.beginTransaction().
-            replace(R.id.content_frame, MissionFragment()).commit()
+            replace(R.id.content_frame, MainFragment()).commit()
         }
     }
 }

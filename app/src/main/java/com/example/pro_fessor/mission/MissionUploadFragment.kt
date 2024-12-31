@@ -102,7 +102,7 @@ class MissionUploadFragment() : Fragment(){
                 MissionData.addMissionItem(newMissionItem)
             }
             Toast.makeText(requireContext(), "업로드 완료!", Toast.LENGTH_SHORT).show()
-            val fragment = MissionFragment()
+            val fragment = MainFragment()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)
