@@ -87,6 +87,7 @@ class MissionUploadFragment() : Fragment(){
 
             val newMissionItem = categoryNumber?.let { it1 ->
                 MissionDto(
+                    id = MissionData.getMissionDataList().size + 1,
                     name = EditText.text.toString(),
                     startDate = startDate!!,
                     endDate = endDate!!,
