@@ -18,7 +18,7 @@ import com.example.pro_fessor.sampledata.GalleryGroupData
 @Suppress("DEPRECATION")
 class GalleryAdapter (private val context: Context,
                       private var dataList: MutableList<GalleryDto>,
-                      private val onItemClick: (Int) -> Unit) :
+                      private val onItemClick: (Int, View) -> Unit) :
     RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>() {
 
     class GalleryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -74,8 +74,8 @@ class GalleryAdapter (private val context: Context,
             holder.imageView.setImageResource(R.drawable.example_mask) // 오류 시 기본 이미지 설정
         }
 
-        holder.cardView.setOnClickListener {
-            onItemClick(data.memberId)
+        holder.imageView.setOnClickListener {
+            onItemClick(data.memberId, holder.imageView)
         }
     }
 

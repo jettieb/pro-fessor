@@ -18,6 +18,7 @@
         android:adjustViewBounds="true"
         android:layout_gravity="center_vertical"
         android:scaleType="centerCrop"
-        android:src="@drawable/img_20"/>
+        android:src="@drawable/img_20"
+        android:transitionName="shared_image_transition"/>
 
 </androidx.cardview.widget.CardView>

@@ -1,8 +1,11 @@
 package com.example.pro_fessor.gallery
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +20,15 @@ import kotlin.math.abs
 
 @Suppress("DEPRECATION")
 class GalleryDetailFragment : Fragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(requireContext())
+            .inflateTransition(android.R.transition.move).apply {
+                duration = 500
+            }
+    }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.gallery_detail, container, false)

@@ -66,15 +66,19 @@ class GalleryFragment : Fragment() {
 
 
         galleryAdapter = GalleryAdapter(context = requireContext(),
-            dataList = getGalleryDataList().filter { it.date == "2024-12-29" }.toMutableList()) { id ->
+            dataList = getGalleryDataList().filter { it.date == "2024-12-29" }.toMutableList()) { id, sharedView ->
             val fragment = GalleryDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)
                 }
             }
-            requireActivity().supportFragmentManager.beginTransaction().
-                replace(R.id.content_frame, fragment).
-                addToBackStack(null).commit()
+
+            // Fragment 전환 시 Shared Element Transition 설정
+            requireActivity().supportFragmentManager.beginTransaction()
+                .addSharedElement(sharedView, "shared_image_transition") // 애니메이션에 사용할 뷰 연결
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         recyclerView.adapter = galleryAdapter

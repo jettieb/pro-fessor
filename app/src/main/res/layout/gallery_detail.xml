@@ -27,7 +27,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:scaleType="fitStart"
-                android:src="@drawable/img_20"/>
+                android:src="@drawable/img_20"
+                android:transitionName="shared_image_transition"/>
 
             <!--이름-->
             <TextView

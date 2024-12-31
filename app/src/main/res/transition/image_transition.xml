@@ -1,0 +1,13 @@
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"> <!-- 애니메이션 지속 시간 (밀리초 단위) -->
+
+    <changeBounds
+        android:duration="500" /> <!-- 크기/위치 변화 시간 -->
+
+    <changeTransform
+        android:duration="500" /> <!-- 회전, 스케일 변화 시간 -->
+
+    <changeImageTransform
+        android:duration="500" /> <!-- 이미지 스케일 변화 시간 -->
+
+</transitionSet>
