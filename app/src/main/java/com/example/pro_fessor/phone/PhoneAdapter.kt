@@ -71,10 +71,10 @@ class PhoneAdapter(private var sectionedList: List<ListItem>,
             is ListItem.Contact -> {
 
                 val isExpanded = position == previousClick
-                val isFirstInSection = position > 0 && sectionedList[position - 1] is ListItem.Header
+                val isFirstInSection = (position > 0 && sectionedList[position - 1] is ListItem.Header)  || (position == 0 && !(sectionedList[position] is ListItem.Header))
                 val isLastInSection = when {
                     position == sectionedList.size - 1 -> true // 리스트의 마지막 요소인 경우
-                    sectionedList[position + 1] is ListItem.Header -> true // 다음 아이템이 헤더인 경우
+                    sectionedList[position + 1] is ListItem.Header -> true // 다음 아이템이 헤더인 경우)
                     else -> false // 그 외
                 }
                 Log.d("hello", isFirstInSection.toString())

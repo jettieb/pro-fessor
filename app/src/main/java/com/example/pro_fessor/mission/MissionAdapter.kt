@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.graphics.Color
+import android.util.Log
 import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.map.MapFragment
@@ -18,8 +20,8 @@ import com.example.pro_fessor.sampledata.MissionDto
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class MissionAdapter (private val missionDataList: List<MissionDto>,
-                      private val onItemClick: () -> Unit) //람다식으로 인자값 받음
+class MissionAdapter (private var missionDataList: MutableList<MissionDto>,
+                      private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
     : RecyclerView.Adapter<MissionAdapter.MissionViewHolder>(){
 
     class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -27,8 +29,7 @@ class MissionAdapter (private val missionDataList: List<MissionDto>,
         val dateTextView: TextView = view.findViewById(R.id.mission_date)
         val percentTextView: TextView = view.findViewById(R.id.mission_percent)
         val categoryView: ImageView = view.findViewById(R.id.mission_category)
-        val progressView: LinearLayout = view.findViewById(R.id.progress_btn)
-        val uploadButton: Button = view.findViewById(R.id.progress_btn)
+        val cardView: CardView = view.findViewById(R.id.mission)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder {
@@ -39,21 +40,6 @@ class MissionAdapter (private val missionDataList: List<MissionDto>,
 
     @SuppressLint("DiscouragedApi", "SetTextI18n")
     override fun onBindViewHolder(holder: MissionViewHolder, position: Int) {
-        //상단바
-        if(holder.progressView.gravity == Gravity.START){
-            missionDataList.filter { it.isDone == false }
-        } else{
-            missionDataList.filter { it.isDone == true }
-        }
-        //상단바 버튼 클릭 이벤트
-        holder.progressView.setOnClickListener{
-            if(holder.progressView.gravity == Gravity.START){
-                holder.progressView.gravity = Gravity.END
-            } else{
-                holder.progressView.gravity = Gravity.START
-            }
-        }
-
         val data = missionDataList[position]
         val colorList: List<String> = FontColorList.getFontColorList()
 
@@ -75,14 +61,21 @@ class MissionAdapter (private val missionDataList: List<MissionDto>,
         holder.nameTextView.text = data.name
         holder.dateTextView.text = "인증 기간: $startDateFormatted ~ $endDateFormatted"
         holder.percentTextView.text = "달성률\n${data.percent}%"
-        holder.percentTextView.setTextColor(Color.parseColor(colorList[data.category]))
+        holder.percentTextView.setTextColor(Color.parseColor(colorList[data.category - 1]))
 
-        // 미션 업로드 이벤트 설정
-        holder.uploadButton.setOnClickListener {
-            onItemClick()
+        holder.cardView.setOnClickListener {
+            onItemClick(data.id)
         }
     }
 
     // 아이템 개수 반환
     override fun getItemCount(): Int = missionDataList.size
+
+    // 데이터 업데이트 메서드
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(newMissionList: List<MissionDto>) {
+        missionDataList.clear()
+        missionDataList.addAll(newMissionList)
+        notifyDataSetChanged()
+    }
 }
