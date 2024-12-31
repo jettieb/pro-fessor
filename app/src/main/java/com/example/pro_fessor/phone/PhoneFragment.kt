@@ -43,10 +43,10 @@ class PhoneFragment : Fragment() {
 
             requireActivity().supportFragmentManager.beginTransaction()
                 .setCustomAnimations(
-                    R.anim.slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
-                    R.anim.slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
-                    R.anim.slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
-                    R.anim.slide_out_right
+                    R.anim.phone_slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
+                    R.anim.phone_slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_right
                 )
                 .replace(R.id.content_frame, PhoneSearchFragment())
                 .addToBackStack(null)

@@ -76,8 +76,8 @@ class GalleryFragment : Fragment() {
             // Fragment 전환 시 Shared Element Transition 설정
             requireActivity().supportFragmentManager.beginTransaction()
                 .addSharedElement(sharedView, "shared_image_transition") // 애니메이션에 사용할 뷰 연결
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null)
+                .replace(R.id.content_frame, fragment, "galleryFragment")
+                .addToBackStack("galleryFragment")
                 .commit()
         }
 

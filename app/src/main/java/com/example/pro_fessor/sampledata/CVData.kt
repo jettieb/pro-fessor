@@ -66,7 +66,8 @@ object CVData {
             CVDto(
                 memberId = 11,
                 edu = "대전외국어고등학교 졸업\n이화여자대학교 졸업\n- 영어영문학과 주전공\n- 미디어학과 복수전공\n- 3.95/4.5 GPA",
-                experience = "학생 단체, 마케팅 팀\n- 소셜 미디어 관리\n- 캠페인 결과 분석",
+                experience = "학생 단체, 마케팅 팀\n- 소셜 미디어 관리\n- 캠페인 결과 분석\n- 생산 공정 분석 보조\n- 전자 회로 설계\n- 머신러닝 데이터셋 준비\n" +
+                        "- 코드 테스트 및 디버깅",
                 qualification = "박사"
             , studentID = "20140834"),
             CVDto(

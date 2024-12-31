@@ -32,7 +32,7 @@ class PhoneDetailFragment : Fragment() {
                 val cv = CVDataList.find{it.memberId == memberId}
                 if(cv != null){
                     // 상단바 텍스트 변경 및 뒤로가기 버튼 추가
-                    view.findViewById<TextView>(R.id.top_bar_text).text = member.name
+                    // view.findViewById<TextView>(R.id.top_bar_text).text = member.name
                     val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
                     backArrow.visibility = View.VISIBLE
 
