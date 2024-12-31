@@ -1,5 +1,7 @@
 package com.example.pro_fessor.map
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,15 @@ import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
+import android.util.Log
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
+import com.example.pro_fessor.sampledata.CVDto
+import com.example.pro_fessor.sampledata.MemberData
+import com.example.pro_fessor.sampledata.MemberDto
+import com.naver.maps.map.CameraUpdate
 
 
 @Suppress("DEPRECATION")
@@ -32,7 +43,7 @@ class MapFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val lat : Double = arguments?.getDouble("lat") ?: -1.0 //위도
         val lng : Double = arguments?.getDouble("lng") ?: -1.0 //경도
-        val name : String = arguments?.getString("name") ?: "" //경도
+        val memberId : Int = arguments?.getInt("memberId") ?: -1 //경도
 
         // 상단바 이름 변경
         view.findViewById<TextView>(R.id.top_bar_text).text = "지도"
@@ -56,9 +67,17 @@ class MapFragment : Fragment() {
                 this.isMapInitialized = true // 지도 초기화 완료
                 setupMap(naverMap)
 
-                if(lat != -1.0 && lng != -1.0 && name != ""){
+                if(lat != -1.0 && lng != -1.0 && memberId != -1){
                     val marker = Marker()
-                    setMarker(marker, lat, lng, name);
+                    val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
+                    val member = memberDataList.find { it.memberId == memberId }
+                    if (member != null) {
+                        setMarker(marker, lat, lng, member)
+                    }
+
+                    // 카메라 업데이트: 특정 핀으로 이동
+                    val cameraUpdate = CameraUpdate.scrollTo(marker.position)
+                    naverMap.moveCamera(cameraUpdate)
                 }
             }
         }
@@ -86,13 +105,23 @@ class MapFragment : Fragment() {
     }
 
     //마커 표시
-    private fun setMarker(marker: Marker, lat: Double, lng: Double, name: String) {
+    private fun setMarker(marker: Marker, lat: Double, lng: Double, member: MemberDto) {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.map_pin, null)
 
-        // 텍스트 설정
-        val textView = view.findViewById<TextView>(R.id.pin_name)
-        textView.text = name
+        //phone component update
+        val cvDataList: List<CVDto> = CVData.getCVDataList()
+        val cv = cvDataList.find {it.memberId == member.memberId}
+
+        val imageView : ImageView = view.findViewById(R.id.phone_component_image)
+        val nameText : TextView = view.findViewById(R.id.phone_component_name)
+        val statusText : TextView = view.findViewById(R.id.phone_component_status)
+
+        if(member != null && cv != null){
+            imageView.setImageResource(member.imgPath)
+            nameText.text = member.name
+            statusText.text = cv.qualification
+        }
 
         // 뷰를 Bitmap으로 변환
         val bitmap = createBitmapFromView(view)
@@ -105,6 +134,11 @@ class MapFragment : Fragment() {
 
         //마커 표시
         marker.map = naverMap
+
+        marker.setOnClickListener {
+            callPhoneNumber(member.phone)
+            true
+        }
     }
 
     private fun createBitmapFromView(view: View): Bitmap {
@@ -117,5 +151,13 @@ class MapFragment : Fragment() {
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
+    }
+
+    private fun callPhoneNumber(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:$phoneNumber") // 전화번호를 URI 형식으로 설정
+        }
+        // Intent 실행
+        startActivity(intent)
     }
 }
