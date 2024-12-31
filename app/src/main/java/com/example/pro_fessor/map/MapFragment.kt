@@ -22,9 +22,15 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.pro_fessor.mission.MissionAdapter
+import com.example.pro_fessor.mission.MissionCompleteFragment
 import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
+import com.example.pro_fessor.sampledata.MissionData
+import com.example.pro_fessor.sampledata.MissionDto
 import com.naver.maps.map.CameraAnimation
 import com.naver.maps.map.CameraUpdate
 
@@ -83,6 +89,25 @@ class MapFragment : Fragment() {
                     naverMap.moveCamera(cameraUpdate)
                 }
             }
+        }
+
+        //recycleView 설정
+        val memberList: List<MemberDto> = MemberData.getPhoneDataList()
+        val recyclerView: RecyclerView = view.findViewById(R.id.map_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)   //가로로 나열
+        recyclerView.adapter = MapAdapter(memberList) { id ->
+            val marker = Marker()
+            val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
+            val member = memberDataList.find { it.memberId == id }
+            if (member != null) {
+                setMarker(marker, member.lat, member.lng, member)
+            }
+
+            // 카메라 업데이트: 특정 핀으로 이동
+            naverMap.locationTrackingMode = LocationTrackingMode.None
+            val cameraUpdate = CameraUpdate.scrollTo(marker.position)
+                .animate(CameraAnimation.Easing)
+            naverMap.moveCamera(cameraUpdate)
         }
     }
 
