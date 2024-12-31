@@ -2,7 +2,6 @@ package com.example.pro_fessor.mission
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.gallery.PhoneDetailFragment
+import com.example.pro_fessor.sampledata.MissionCompleteData
 import com.example.pro_fessor.sampledata.MissionData
 import com.example.pro_fessor.sampledata.MissionDto
 
@@ -76,8 +77,13 @@ class MissionFragment : Fragment() {
 
         // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열
-        recyclerView.adapter = MissionAdapter(filteredList.toMutableList()) {
-            val fragment = MissionUploadFragment()
+        recyclerView.adapter = MissionAdapter(filteredList.toMutableList()) { id ->
+            // onItemClick 이벤트 처리
+            val fragment = MissionCompleteFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("missionId", id)
+                }
+            }
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.content_frame, fragment)
                 .addToBackStack(null)

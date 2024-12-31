@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.map.MapFragment
@@ -20,7 +21,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class MissionAdapter (private var missionDataList: MutableList<MissionDto>,
-                      private val onItemClick: () -> Unit) //람다식으로 인자값 받음
+                      private val onItemClick: (Int) -> Unit) //람다식으로 인자값 받음
     : RecyclerView.Adapter<MissionAdapter.MissionViewHolder>(){
 
     class MissionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,6 +29,7 @@ class MissionAdapter (private var missionDataList: MutableList<MissionDto>,
         val dateTextView: TextView = view.findViewById(R.id.mission_date)
         val percentTextView: TextView = view.findViewById(R.id.mission_percent)
         val categoryView: ImageView = view.findViewById(R.id.mission_category)
+        val cardView: CardView = view.findViewById(R.id.mission)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionViewHolder {
@@ -60,6 +62,10 @@ class MissionAdapter (private var missionDataList: MutableList<MissionDto>,
         holder.dateTextView.text = "인증 기간: $startDateFormatted ~ $endDateFormatted"
         holder.percentTextView.text = "달성률\n${data.percent}%"
         holder.percentTextView.setTextColor(Color.parseColor(colorList[data.category - 1]))
+
+        holder.cardView.setOnClickListener {
+            onItemClick(data.id)
+        }
     }
 
     // 아이템 개수 반환

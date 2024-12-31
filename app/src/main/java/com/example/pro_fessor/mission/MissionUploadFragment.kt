@@ -2,7 +2,6 @@ package com.example.pro_fessor.mission
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
-import com.example.pro_fessor.sampledata.GalleryData
-import com.example.pro_fessor.sampledata.GalleryDto
+import com.example.pro_fessor.sampledata.MissionCompleteData
 import com.example.pro_fessor.sampledata.MissionData
 import com.example.pro_fessor.sampledata.MissionDto
 import java.time.LocalDate
