@@ -1,5 +1,6 @@
 package com.example.pro_fessor.mission
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -25,6 +26,7 @@ class MissionFragment : Fragment() {
         return inflater.inflate(R.layout.activity_mission, container, false)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
@@ -47,8 +49,8 @@ class MissionFragment : Fragment() {
         inProgressText.setOnClickListener{
             if(layoutParams.gravity == Gravity.END){
                 layoutParams.gravity = Gravity.START
-                inProgressText.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_color2))
-                completeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                inProgressText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                completeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_color2))
                 progressView.layoutParams = layoutParams
                 updateRecyclerView(recyclerView, missionList.filter { !it.isDone }) // 미완료 필터링
             }
@@ -56,8 +58,8 @@ class MissionFragment : Fragment() {
         completeText.setOnClickListener{
             if(layoutParams.gravity == Gravity.START){
                 layoutParams.gravity = Gravity.END
-                inProgressText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                completeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_color2))
+                inProgressText.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_color2))
+                completeText.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 progressView.layoutParams = layoutParams
                 updateRecyclerView(recyclerView, missionList.filter { it.isDone })
             }
