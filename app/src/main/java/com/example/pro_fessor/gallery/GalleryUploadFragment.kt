@@ -58,9 +58,6 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
             }
         })
 
-
-
-
         val imagePath = arguments?.getString("imagePath")
         val titleEditText = view.findViewById<EditText>(R.id.titleEditText)
         val uploadButton = view.findViewById<Button>(R.id.uploadButton)
@@ -90,6 +87,7 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
 
             val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             val newGalleryItem = GalleryDto(
+                id = GalleryData.getGalleryDataList().size + 1,
                 date = currentDate,
                 memberId = GalleryData.getGalleryDataList().size + 1,
                 title = title,
