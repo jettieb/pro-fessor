@@ -47,7 +47,6 @@ class MapAdapter (private var memberDataList: List<MemberDto>,
 
         // 클릭 이벤트 설정
         holder.cardView.setOnClickListener {
-            Log.d("d", "실행")
             onItemClick(member.memberId) // 클릭된 아이템의 memberId를 전달
         }
     }
