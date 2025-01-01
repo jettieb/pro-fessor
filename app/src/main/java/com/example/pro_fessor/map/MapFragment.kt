@@ -90,7 +90,6 @@ class MapFragment : Fragment() {
 
                 // 특정 GPS 위치로 이동 (lat, lng 값이 유효한 경우)
                 if (lat != -1.0 && lng != -1.0 && memberId != -1) {
-                    Log.d("d", "핀 실행")
                     val member = memberDataList.find { it.memberId == memberId }
                     member?.let {
                         moveToLocation(lat, lng, it)
@@ -135,8 +134,6 @@ class MapFragment : Fragment() {
         val firstVisible = layoutManager.findFirstVisibleItemPosition()
         val lastVisible = layoutManager.findLastVisibleItemPosition()
 
-        Log.d("recyclerView", "recyclerView 시작")
-
         return (firstVisible..lastVisible).minByOrNull { position ->
             val view = recyclerView.findViewHolderForAdapterPosition(position)?.itemView ?: return@minByOrNull Int.MAX_VALUE
             val itemCenter = (view.left + view.right) / 2
@@ -156,7 +153,6 @@ class MapFragment : Fragment() {
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(pinlat, pinlng))
             .animate(CameraAnimation.Easing)
         naverMap.moveCamera(cameraUpdate)
-        Log.d("누구", pinmember.name)
     }
 
     private fun createAndSetMarker(member: MemberDto, marker: Marker = Marker()) {
