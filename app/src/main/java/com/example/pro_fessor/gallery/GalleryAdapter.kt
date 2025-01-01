@@ -75,7 +75,7 @@ class GalleryAdapter (private val context: Context,
         }
 
         holder.imageView.setOnClickListener {
-            onItemClick(data.memberId, holder.imageView)
+            onItemClick(data.id, holder.imageView)
         }
     }
 

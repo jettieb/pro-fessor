@@ -9,4 +9,8 @@ data class MemberDto(
     val lng : Double,    //경도
     val imgPath: Int,
     val imgCirclePath: Int
+    val major: String,
+    val minor: String,
+    val birth: String,
+    val home: String
 )

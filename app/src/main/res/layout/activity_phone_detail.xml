@@ -73,8 +73,8 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/phone_detail_major"
         android:layout_marginTop="5dp"
-        android:id="@+id/phone_detail_department"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -202,6 +202,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
             <TextView
+                android:id="@+id/phone_detail_intro"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="wrap_content"
