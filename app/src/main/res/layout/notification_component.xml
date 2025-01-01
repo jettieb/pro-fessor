@@ -5,23 +5,26 @@
     android:id="@+id/mission"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    android:layout_marginHorizontal="15dp"
-    app:cardCornerRadius="10dp"
+    android:layout_marginVertical="3dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="0dp">
 
     <LinearLayout
+        android:id="@+id/color"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="13dp"
+        android:paddingVertical="20dp"
+        android:background="#D2F0F1"
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/mission_category"
+            android:id="@+id/notification_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="15dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
             android:src="@drawable/mission_1" />
 
@@ -40,7 +43,6 @@
                 android:paddingTop="2dp"
                 android:textColor="@color/font_color"
                 android:fontFamily="@font/pretendard_medium"
-                android:background="@color/mint"
                 android:text="모닝 과일먹기" />
 
             <TextView
@@ -49,21 +51,15 @@
                 android:layout_height="wrap_content"
                 android:textSize="11sp"
                 android:textColor="@color/main_color"
-                android:text="인증 기간: 2024/11/21 - 2024/12/25" />
+                android:text="인증 기간: 2024/11/21 - 2024/12/25"
+                android:visibility="visible"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/mission_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="11sp"
-            android:textColor="#E5AEB3"
-            android:fontFamily="@font/pretendard_medium"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:layout_marginEnd="15dp"
-            android:text="달성률 \n 70%" />
-
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background"/>
 
 </androidx.cardview.widget.CardView>

@@ -57,7 +57,6 @@ class NotificationFragment : Fragment() {
 
         recyclerView.adapter = NotificationAdapter(notifications) { notification ->
             // onItemClick 이벤트 처리
-            notification.clicked = true
             when (notification.type) {
                 NotificationType.GALLERY_POST -> {
                     val fragment = GalleryDetailFragmentNotification().apply {

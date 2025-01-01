@@ -11,6 +11,7 @@ object MissionCompleteData {
             MissionCompleteDto(1, 5),
 
             // Mission 2
+            MissionCompleteDto(2, 1),
             MissionCompleteDto(2, 6),
             MissionCompleteDto(2, 7),
             MissionCompleteDto(2, 8),
@@ -18,21 +19,25 @@ object MissionCompleteData {
             MissionCompleteDto(2, 10),
 
             // Mission 3
+            MissionCompleteDto(3, 1),
             MissionCompleteDto(3, 11),
             MissionCompleteDto(3, 12),
             MissionCompleteDto(3, 13),
             MissionCompleteDto(3, 14),
 
             // Mission 4
+            MissionCompleteDto(4, 1),
             MissionCompleteDto(4, 16),
             MissionCompleteDto(4, 17),
             MissionCompleteDto(4, 18),
 
             // Mission 5
+            MissionCompleteDto(5, 1),
             MissionCompleteDto(5, 21),
             MissionCompleteDto(5, 22),
 
             // Mission 6
+            MissionCompleteDto(6, 1),
             MissionCompleteDto(6, 26),
             MissionCompleteDto(6, 27),
             MissionCompleteDto(6, 28),
@@ -40,10 +45,12 @@ object MissionCompleteData {
 
             // Mission 7
             MissionCompleteDto(7, 1),
+            MissionCompleteDto(7, 1),
             MissionCompleteDto(7, 2),
             MissionCompleteDto(7, 3),
 
             // Mission 10
+            MissionCompleteDto(10, 1),
             MissionCompleteDto(10, 16),
             MissionCompleteDto(10, 17),
             MissionCompleteDto(10, 18),
@@ -51,6 +58,7 @@ object MissionCompleteData {
             MissionCompleteDto(10, 20),
 
             // Mission 11
+            MissionCompleteDto(11, 1),
             MissionCompleteDto(11, 21),
             MissionCompleteDto(11, 22),
             MissionCompleteDto(11, 23),
@@ -58,6 +66,7 @@ object MissionCompleteData {
             MissionCompleteDto(11, 25),
 
             // Mission 12
+            MissionCompleteDto(12, 1),
             MissionCompleteDto(12, 26),
 
             // Mission 13

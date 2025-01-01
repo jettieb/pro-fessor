@@ -15,5 +15,6 @@
     <color name="gray">#EBEBEB</color>
     <color name="detail_color">#314C71</color>
     <color name="font_color">#303030</color>
+    <color name="notification_color">#D2F0F1</color>
 
 </resources>
