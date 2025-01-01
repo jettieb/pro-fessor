@@ -2,9 +2,10 @@
 
 ### ✨ 프로젝트 소개
 Pro-fessor는 교수님들이 랩 소속 대학원생들과 연구 프로젝트를 효율적으로 관리하기 위한 어플리케이션입니다.<br> 
-교수님의 효율적인 소통과 관리 기능을 제공하여, 연구 환경에서의 협업과 생산성을 높이는 것을 목표로 합니다.
+교수님의 효율적인 소통과 관리 기능을 제공하여, 연구 환경에서의 협업과 생산성을 높이는 것을 목표로 합니다.<br>
 
 ### ✨ 기능
+
  📞 **연락처 탭**:<br>
 
     - 각 학생의 상세 프로필과 CV를 열람하기
@@ -23,11 +24,14 @@ Pro-fessor는 교수님들이 랩 소속 대학원생들과 연구 프로젝트�
 
 👊🏻 **도전 미션 탭**:<br>
 
-    - 교수님이 정해주시는 도전 미션 
-    - 학생들의 이동을 알림 기능
-
+    - 교수님이 정해주시는 도전 미션와 목표 확인
+    - 미션에 성공한 학생 확인 가능
 
 <br>
+
+## 🗂 기술 스택
+<img src="https://img.shields.io/badge/kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=FFFFFF"/> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=android studio&logoColor=FFFFFF"/>
+
 <br>
 
 ## 🧑🏻‍💻 팀원 소개
@@ -35,8 +39,4 @@ Pro-fessor는 교수님들이 랩 소속 대학원생들과 연구 프로젝트�
 |:--------------:|:--------------:|
 |     [@Sensible-life](https://github.com/Sensible-life)     |     [@jettieb](https://github.com/jettieb)    |
 
-<br>
-
-## 🗂 기술 스택
-<img src="https://img.shields.io/badge/kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=FFFFFF"/> <img src="https://img.shields.io/badge/Android Studio-3DDC84?style=flat-square&logo=android studio&logoColor=FFFFFF"/>
 <br>
