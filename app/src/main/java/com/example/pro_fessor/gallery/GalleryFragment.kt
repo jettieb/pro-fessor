@@ -66,7 +66,7 @@ class GalleryFragment : Fragment() {
 
 
         galleryAdapter = GalleryAdapter(context = requireContext(),
-            dataList = getGalleryDataList().filter { it.date == "2024-12-29" }.toMutableList()) { id, sharedView ->
+            dataList = getGalleryDataList().filter { it.date == "2025-01-01" }.toMutableList()) { id, sharedView ->
             val fragment = GalleryDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt("id", id)

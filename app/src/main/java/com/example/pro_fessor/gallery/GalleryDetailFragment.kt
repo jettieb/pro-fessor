@@ -1,7 +1,5 @@
 package com.example.pro_fessor.gallery
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +17,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
+import com.example.pro_fessor.sampledata.MemberData
+import com.example.pro_fessor.sampledata.MemberDto
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
@@ -64,13 +64,15 @@ class GalleryDetailFragment : Fragment() {
 
         val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
 
-        val memberId = arguments?.getInt("id") ?: -1
-        if (memberId != -1){
-            val memberDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
-            val member = memberDataList.find { it.memberId == memberId }
+        val galleryId = arguments?.getInt("id") ?: -1
+        if (galleryId != -1){
+            val galleryDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
+            val gallery = galleryDataList.find { it.id == galleryId }
+            val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
+            val member = memberDataList.find { it.memberId == gallery?.memberId }
 
-            if (member?.image == -1) {
-                member.imagePath?.let { path ->
+            if (gallery?.image == -1) {
+                gallery.imagePath?.let { path ->
                     try {
                         val bitmap = if (path.startsWith("content://")) {
                             val inputStream = requireContext().contentResolver.openInputStream(Uri.parse(path))
@@ -85,16 +87,23 @@ class GalleryDetailFragment : Fragment() {
                 }
             }
             else {
-                member?.image?.let {
+                gallery?.image?.let {
                     view.findViewById<ImageView>(R.id.gallery_component_image).setImageResource(it)
                 }
             }
 
-            val abstractText = member?.abstract
-            val titleText = member?.title
+            val abstractText = gallery?.abstract
+            val titleText = gallery?.title
+            val date = gallery?.date
+            if (date != null) {
+                Log.d("date", date)
+            }
+            val name = member?.name
 
             view.findViewById<TextView>(R.id.gallery_detail_abstract).text = abstractText
             view.findViewById<TextView>(R.id.gallery_detail_title).text = titleText
+            view.findViewById<TextView>(R.id.gallery_detail_date).text = date
+            view.findViewById<TextView>(R.id.gallery_detail_writer).text = name
         }
 
         val galleryImageView = view.findViewById<ImageView>(R.id.gallery_component_image)

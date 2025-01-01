@@ -5,5 +5,6 @@ data class CVDto(
     val edu: String,
     val experience: String,
     val qualification: String,
-    val studentID: String
+    val studentID: String,
+    val intro: String
 )

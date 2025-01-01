@@ -1,5 +1,6 @@
 package com.example.pro_fessor.gallery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ class PhoneDetailFragment : Fragment() {
         return inflater.inflate(R.layout.activity_phone_detail, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,6 +50,11 @@ class PhoneDetailFragment : Fragment() {
                     view.findViewById<TextView>(R.id.phone_detail_phone).text = member.phone
                     view.findViewById<TextView>(R.id.phone_detail_edu).text = cv.edu
                     view.findViewById<TextView>(R.id.phone_detail_work).text = cv.experience
+                    //수정부분
+                    view.findViewById<TextView>(R.id.phone_detail_intro).text = cv.intro
+                    view.findViewById<TextView>(R.id.phone_detail_major).text = member.major + " 주전공\n" + member.minor + " 부전공"
+                    view.findViewById<TextView>(R.id.phone_detail_birth).text = member.birth
+                    view.findViewById<TextView>(R.id.phone_detail_home).text = member.home
                 }
             }
         }
