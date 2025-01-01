@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
@@ -61,6 +62,8 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
         val imagePath = arguments?.getString("imagePath")
         val titleEditText = view.findViewById<EditText>(R.id.titleEditText)
         val uploadButton = view.findViewById<Button>(R.id.uploadButton)
+        val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        view.findViewById<TextView>(R.id.gallery_detail_date).text = currentDate
 
         imagePath?.let { path ->
             try {

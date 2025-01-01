@@ -64,10 +64,11 @@
             android:autofillHints=""
             android:inputType="textMultiLine"
             android:layout_gravity="center"
-            android:text="12월 31일"
+            android:hint="제목을 입력하세요."
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/pretendard_semibold"
             android:paddingTop="5dp"
+            android:textColorHint="#C5C5C5"
             android:textColor="@color/black"
             android:textSize="25sp" />
         <!--내용-->
