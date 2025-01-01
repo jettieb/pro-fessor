@@ -33,6 +33,8 @@ class MissionUploadFragment() : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
         topBarTextView.text = "도전 과제"
+        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
+        searchButton.visibility = View.GONE
 
         //date picker
         val startDateFrame: FrameLayout = view.findViewById(R.id.mission_start_date)

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +38,9 @@ class MissionCompleteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
         topBarTextView.text = "도전 과제"
+        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
+        searchButton.visibility = View.GONE
+
 
         recyclerView = view.findViewById(R.id.complete_recycler_view)
 
