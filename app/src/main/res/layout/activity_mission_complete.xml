@@ -9,6 +9,9 @@
     <include
         layout="@layout/top_bar" />
 
+    <include
+        layout="@layout/mission_component"/>
+
     <TextView
         android:id="@+id/btn_in_progress"
         android:layout_height="wrap_content"
