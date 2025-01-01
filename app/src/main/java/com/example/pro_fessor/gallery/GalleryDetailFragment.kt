@@ -163,11 +163,10 @@ class GalleryDetailFragment : Fragment() {
     }
 
     private fun navigateToAdjacentPhoto(direction: Int) {
-        Log.d("String", "navigateToAdjacentPhoto")
         var memberId = arguments?.getInt("id") ?: return
         val memberDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
-        Log.d("String", memberDataList.toString())
         Log.d("String", memberId.toString())
+        val t: Int = memberId/20
         if (memberId % 20 == 0) {
             memberId = 20
         }
@@ -183,14 +182,13 @@ class GalleryDetailFragment : Fragment() {
         val newIndex = (currentIndex + direction).coerceIn(0, sameDatePhotos.size - 1)
         Log.d("String", newIndex.toString())
 
-        Log.d("String", memberDataList.toString())
-
         if (newIndex != currentIndex) {
             val newPhoto = sameDatePhotos[newIndex]
 
             val fragment = GalleryDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putInt("id", newPhoto.memberId)
+                    putInt("id", (newPhoto.memberId + t*20))
+                    Log.d("id", newPhoto.memberId.toString())
                 }
             }
 

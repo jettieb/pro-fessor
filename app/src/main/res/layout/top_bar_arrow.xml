@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@color/background">
+    app:cardBackgroundColor="@color/background"
+    android:layout_marginRight="15dp">
 
-    <FrameLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:layout_height="match_parent"
+        android:background="@color/background2"
+        android:paddingVertical="15dp">
 
-        <!--기본값은 안보이지만, 특정 화면에만 보일 수 있도록 visivility 속성 추가-->
         <ImageView
             android:id="@+id/top_bar_arrow"
             android:layout_width="wrap_content"
@@ -22,7 +23,7 @@
             android:layout_gravity="left|center_vertical"
             android:scaleType="fitCenter"
             android:src="@drawable/arrow_black"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/top_bar_text"
@@ -30,21 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
             android:paddingLeft="10dp"
-            android:text="연락처"
+            android:text="알림"
             android:fontFamily="@font/pretendard_bold"
             android:textSize="22dp"
             android:textColor="#080808" />
-
-        <ImageView
-            android:id="@+id/top_bar_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="15dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="70dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/top_bar_search"
-            android:visibility="visible"/>
+    </LinearLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -80,6 +71,4 @@
             android:layout_gravity="right|center_vertical"
             android:scaleType="fitCenter"
             android:src="@drawable/person" />
-
-    </FrameLayout>
 </androidx.cardview.widget.CardView>

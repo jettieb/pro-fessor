@@ -49,11 +49,15 @@ class MissionCompleteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
         topBarTextView.text = "도전 과제"
-        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
-        searchButton.visibility = View.GONE
 
         //component 정보 입력
         val missionId = arguments?.getInt("missionId") ?: -1
+        val backArrow = view.findViewById<ImageView>(R.id.top_bar_arrow)
+        backArrow.visibility = View.VISIBLE
+
+        backArrow.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
         val notificationButton = view.findViewById<ImageView>(R.id.top_bar_bell)
         notificationButton.setOnClickListener {
 
@@ -68,6 +72,7 @@ class MissionCompleteFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
         val notificationNumber = view.findViewById<TextView>(R.id.notificationNumber)
         notificationNumber.text = NotificationData.getCheckdNotificationDataList().toString()
         val mypageButton = view.findViewById<ImageView>(R.id.top_bar_person)
