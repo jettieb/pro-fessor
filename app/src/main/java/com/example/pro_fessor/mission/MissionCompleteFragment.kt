@@ -1,6 +1,9 @@
 package com.example.pro_fessor.mission
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +24,10 @@ import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
 import com.example.pro_fessor.sampledata.MissionCompleteDto
 import com.example.pro_fessor.sampledata.MissionCompleteData
+import com.example.pro_fessor.sampledata.MissionData
+import com.example.pro_fessor.sampledata.MissionDto
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class MissionCompleteFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -34,6 +41,7 @@ class MissionCompleteFragment : Fragment() {
         return inflater.inflate(R.layout.activity_mission_complete, container, false)
     }
 
+    @SuppressLint("SetTextI18n", "DiscouragedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val topBarTextView = view.findViewById<TextView>(R.id.top_bar_text)
@@ -41,10 +49,10 @@ class MissionCompleteFragment : Fragment() {
         val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
         searchButton.visibility = View.GONE
 
+        //component 정보 입력
+        val missionId = arguments?.getInt("missionId") ?: -1
 
         recyclerView = view.findViewById(R.id.complete_recycler_view)
-
-        val missionId = arguments?.getInt("missionId") ?: -1
         if(missionId != -1){
             val missionCompleteList: List<MissionCompleteDto> = MissionCompleteData.getMissionCompleteList()
 
@@ -96,9 +104,34 @@ class MissionCompleteFragment : Fragment() {
                 }
             )
 
-
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter
+
+            val missionList: List<MissionDto> = MissionData.getMissionDataList()
+            val mission = missionList.find { it.id == missionId }
+            //날짜 format
+            if(mission != null){
+                view.findViewById<TextView>(R.id.mission_name).text = mission.name
+                val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+                val startDateFormatted = mission.startDate.format(dateFormatter)
+                val endDateFormatted = mission.endDate.format(dateFormatter)
+                view.findViewById<TextView>(R.id.mission_date).text = "인증 기간: $startDateFormatted ~ $endDateFormatted"
+                view.findViewById<TextView>(R.id.mission_percent).text = "달성률\n${mission.percent}%"
+
+                //사진 링크
+                val link = "mission_${mission.category}"
+                val context = view.findViewById<ImageView>(R.id.mission_category).context
+                val resId = context.resources.getIdentifier(link, "drawable", context.packageName)
+
+                if (resId != 0) {
+                    view.findViewById<ImageView>(R.id.mission_category).setImageResource(resId)
+                } else {
+                    view.findViewById<ImageView>(R.id.mission_category).setImageResource(R.drawable.mission_1) // 기본 이미지
+                }
+
+                val colorList: List<String> = FontColorList.getFontColorList()
+                view.findViewById<TextView>(R.id.mission_percent).setTextColor(Color.parseColor(colorList[mission.category - 1]))
+            }
         }
     }
 
