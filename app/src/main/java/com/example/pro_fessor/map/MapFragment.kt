@@ -164,7 +164,7 @@ class MapFragment : Fragment() {
 
         val cv = CVData.getCVDataList().find { it.memberId == member.memberId }
         cv?.let {
-            imageView.setImageResource(member.imgPath)
+            imageView.setImageResource(member.imgCirclePath)
             imageView.setBackgroundResource(R.drawable.circle)
             cardView.radius = 50f
             nameText.text = member.name

@@ -7,5 +7,6 @@ data class MemberDto(
     val email: String,
     val lat : Double,    //위도
     val lng : Double,    //경도
-    val imgPath: Int
+    val imgPath: Int,
+    val imgCirclePath: Int
 )
