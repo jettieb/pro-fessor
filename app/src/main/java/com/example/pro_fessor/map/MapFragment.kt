@@ -160,11 +160,13 @@ class MapFragment : Fragment() {
         val imageView: ImageView = view.findViewById(R.id.phone_component_image)
         val nameText: TextView = view.findViewById(R.id.phone_component_name)
         val statusText: TextView = view.findViewById(R.id.phone_component_status)
+        val cardView: CardView = view.findViewById(R.id.phone)
 
         val cv = CVData.getCVDataList().find { it.memberId == member.memberId }
         cv?.let {
             imageView.setImageResource(member.imgPath)
             imageView.setBackgroundResource(R.drawable.circle)
+            cardView.radius = 50f
             nameText.text = member.name
             statusText.text = it.qualification
         }
