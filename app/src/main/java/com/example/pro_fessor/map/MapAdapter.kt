@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -39,7 +40,7 @@ class MapAdapter (private var memberDataList: List<MemberDto>,
             holder.statusTextView.text = cv.qualification
             holder.imageView.setImageResource(member.imgPath)
         }
-
+        holder.cardView.radius = 50f
         //길이 변경
         val layoutParams = holder.cardView.layoutParams
         layoutParams.width = dpToPx(holder.cardView.context, 200)

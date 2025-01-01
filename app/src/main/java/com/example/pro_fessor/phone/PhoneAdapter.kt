@@ -173,7 +173,7 @@ class ContactViewHolder(
             }
             else -> {
                 Log.d("hello", "It is in the middle")
-                frameView.setBackgroundResource(R.color.background2)
+                frameView.setBackgroundResource(R.drawable.rounded_card_background_middle)
                 cardView.setCardBackgroundColor(cardView.context.getColor(R.color.background2))
                 lineView.visibility = View.VISIBLE
             }

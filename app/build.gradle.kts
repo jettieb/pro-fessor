@@ -64,4 +64,8 @@ dependencies {
     // 네이버 지도 SDK
     implementation("com.naver.maps:map-sdk:3.20.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // gif
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.15.1")
 }

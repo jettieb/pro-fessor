@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Window
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
 @Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
@@ -17,11 +21,23 @@ class SplashActivity : AppCompatActivity() {
         // 애니메이션 비활성화
         overridePendingTransition(0, 0)
 
+        val splashGif = findViewById<ImageView>(R.id.splashGif)
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.splash)
+            .apply(
+                RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE) // 디스크 캐싱 사용
+                    .override(800, 800) // 원본 크기로 디코딩
+                    .skipMemoryCache(true) // 메모리 캐시 비활성화
+            )
+            .into(splashGif)
+
         // 일정 시간 후 MainActivity로 이동
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(0, 0)
             finish()
-        }, 2000) // 3초 대기
+        }, 3500) // 3초 대기
     }
 }

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -43,6 +44,8 @@ class MainFragment : Fragment() {
         val inProgressText: TextView = view.findViewById(R.id.btn_in_progress)
         val completeText: TextView = view.findViewById(R.id.btn_completed)
         val uploadButton: Button = view.findViewById(R.id.btn_add)
+        val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
+        searchButton.visibility = View.GONE
 
 
         inProgressText.setOnClickListener {
