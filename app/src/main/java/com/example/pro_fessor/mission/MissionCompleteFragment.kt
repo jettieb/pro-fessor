@@ -2,6 +2,7 @@ package com.example.pro_fessor.mission
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.media.Image
 import android.net.Uri
 import android.os.Bundle
@@ -127,6 +128,9 @@ class MissionCompleteFragment : Fragment() {
                 } else {
                     view.findViewById<ImageView>(R.id.mission_category).setImageResource(R.drawable.mission_1) // 기본 이미지
                 }
+
+                val colorList: List<String> = FontColorList.getFontColorList()
+                view.findViewById<TextView>(R.id.mission_percent).setTextColor(Color.parseColor(colorList[mission.category - 1]))
             }
         }
     }
