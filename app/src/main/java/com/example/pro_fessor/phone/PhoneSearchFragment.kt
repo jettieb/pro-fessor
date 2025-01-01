@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
+import com.example.pro_fessor.map.MapFragment
 import com.example.pro_fessor.phone.ListItem
 import com.example.pro_fessor.phone.PhoneAdapter
 import com.example.pro_fessor.sampledata.CVDto
@@ -38,6 +39,7 @@ class PhoneSearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
 
         val searchEditText = view.findViewById<EditText>(R.id.titleEditText)
         searchEditText.requestFocus()
@@ -58,23 +60,41 @@ class PhoneSearchFragment : Fragment() {
         val initialData = listOf<ListItem>()
         adapter = PhoneAdapter(initialData,
             onItemClick = { id ->
-                // Handle item click (e.g., navigate to detail view)
                 val fragment = PhoneDetailFragment().apply {
                     arguments = Bundle().apply {
                         putInt("id", id)
                     }
                 }
+                // Handle item click (e.g., navigate to detail view)
                 requireActivity().supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in_up,
+                        0,
+                        0,
+                        R.anim.slide_out_down
+                    )
                     .replace(R.id.content_frame, fragment)
                     .addToBackStack(null)
                     .commit()
             },
             onLocationClick = { id ->
                 // Handle location click (e.g., open map view)
-                val intent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("geo:0,0?q=${id}") // Example location handling
+                val member = memberDataList.find { it.memberId == id }
+
+                if(member != null){
+                    val fragment = MapFragment().apply {
+                        arguments = Bundle().apply {
+                            putDouble("lat", member.lat)
+                            putDouble("lng", member.lng)
+                            putInt("memberId", member.memberId)
+                        }
+                    }
+
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
-                startActivity(intent)
             }
         )
 

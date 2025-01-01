@@ -96,7 +96,7 @@ class NotificationAdapter(
                 val missionDataList: List<MissionDto> = MissionData.getMissionDataList()
                 val mission = missionDataList.find { it.id == challengeId}
                 val title = mission?.name
-                messageTextView.text = "홍길동 님께서 \"" + title + "\"\n" + notification.message + "."
+                messageTextView.text = "조성원 님께서 \"" + title + "\"\n" + notification.message + "."
                 dateTextView.text = "기간: " + mission?.startDate + " - " + mission?.endDate
             }
 

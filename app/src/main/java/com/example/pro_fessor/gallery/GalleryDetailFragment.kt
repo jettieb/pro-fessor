@@ -45,11 +45,13 @@ class GalleryDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("String", "View created")
         gestureDetector = GestureDetector(requireContext(), object : GestureDetector.SimpleOnGestureListener() {
             override fun onFling(e1: MotionEvent?, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
                 if (e1 == null || e2 == null) return false
 
                 val deltaX = e2.x - e1.x
+                Log.d("String", deltaX.toString())
                 if (abs(deltaX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     if (deltaX > 0) {
                         navigateToAdjacentPhoto(-1) // 오른쪽 스와이프 -> 이전 사진
@@ -111,7 +113,8 @@ class GalleryDetailFragment : Fragment() {
         }
 
         val galleryImageView = view.findViewById<ImageView>(R.id.gallery_component_image)
-        // gallery_component_image를 Bitmap으로 변환
+
+        // RGB값 가져와서 arrow색깔 변형하기
         galleryImageView.post {
             val drawable = galleryImageView.drawable
             if (drawable is android.graphics.drawable.BitmapDrawable) {
@@ -160,14 +163,28 @@ class GalleryDetailFragment : Fragment() {
     }
 
     private fun navigateToAdjacentPhoto(direction: Int) {
-        val memberId = arguments?.getInt("id") ?: return
+        Log.d("String", "navigateToAdjacentPhoto")
+        var memberId = arguments?.getInt("id") ?: return
         val memberDataList: List<GalleryDto> = GalleryData.getGalleryDataList()
+        Log.d("String", memberDataList.toString())
+        Log.d("String", memberId.toString())
+        if (memberId % 20 == 0) {
+            memberId = 20
+        }
+        else {
+            memberId = memberId % 20
+        }
         val currentPhoto = memberDataList.find { it.memberId == memberId } ?: return
+        Log.d("String", currentPhoto.toString())
 
         val sameDatePhotos = memberDataList.filter { it.date == currentPhoto.date }
         val currentIndex = sameDatePhotos.indexOf(currentPhoto)
 
         val newIndex = (currentIndex + direction).coerceIn(0, sameDatePhotos.size - 1)
+        Log.d("String", newIndex.toString())
+
+        Log.d("String", memberDataList.toString())
+
         if (newIndex != currentIndex) {
             val newPhoto = sameDatePhotos[newIndex]
 
