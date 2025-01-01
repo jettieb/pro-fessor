@@ -63,6 +63,7 @@ class CompletedMissionFragment : Fragment() {
             }
         })
 
+
         recyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
             private var isScrolling = false
 

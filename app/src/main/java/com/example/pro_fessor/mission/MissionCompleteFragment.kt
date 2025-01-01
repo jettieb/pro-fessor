@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.gallery.PhoneDetailFragment
 import com.example.pro_fessor.map.MapFragment
+import com.example.pro_fessor.mypage.MypageFragment
+import com.example.pro_fessor.notification.NotificationFragment
 import com.example.pro_fessor.phone.ListItem
 import com.example.pro_fessor.phone.PhoneAdapter
 import com.example.pro_fessor.sampledata.CVDto
@@ -26,6 +28,7 @@ import com.example.pro_fessor.sampledata.MissionCompleteDto
 import com.example.pro_fessor.sampledata.MissionCompleteData
 import com.example.pro_fessor.sampledata.MissionData
 import com.example.pro_fessor.sampledata.MissionDto
+import com.example.pro_fessor.sampledata.NotificationData
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -51,7 +54,36 @@ class MissionCompleteFragment : Fragment() {
 
         //component 정보 입력
         val missionId = arguments?.getInt("missionId") ?: -1
+        val notificationButton = view.findViewById<ImageView>(R.id.top_bar_bell)
+        notificationButton.setOnClickListener {
 
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.phone_slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
+                    R.anim.phone_slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_right
+                )
+                .replace(R.id.content_frame, NotificationFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+        val notificationNumber = view.findViewById<TextView>(R.id.notificationNumber)
+        notificationNumber.text = NotificationData.getCheckdNotificationDataList().toString()
+        val mypageButton = view.findViewById<ImageView>(R.id.top_bar_person)
+        mypageButton.setOnClickListener {
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.phone_slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
+                    R.anim.phone_slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_right
+                )
+                .replace(R.id.content_frame, MypageFragment())
+                .addToBackStack(null)
+                .commit()
+        }
         recyclerView = view.findViewById(R.id.complete_recycler_view)
         if(missionId != -1){
             val missionCompleteList: List<MissionCompleteDto> = MissionCompleteData.getMissionCompleteList()

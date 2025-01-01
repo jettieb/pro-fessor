@@ -19,8 +19,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.pro_fessor.R
+import com.example.pro_fessor.notification.NotificationType
 import com.example.pro_fessor.sampledata.GalleryData
 import com.example.pro_fessor.sampledata.GalleryDto
+import com.example.pro_fessor.sampledata.NotificationData
+import com.example.pro_fessor.sampledata.NotificationDto
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -92,12 +95,20 @@ class GalleryUploadFragment(private val galleryAdapter: GalleryAdapter?) : Fragm
             val newGalleryItem = GalleryDto(
                 id = GalleryData.getGalleryDataList().size + 1,
                 date = currentDate,
-                memberId = GalleryData.getGalleryDataList().size + 1,
+                memberId = 1,
                 title = title,
                 abstract = abstractText,
                 imagePath = imagePath,
                 image = -1
             )
+            val newNotification = NotificationDto(
+                id = NotificationData.getNotificationDataList().size + 1,
+                type = NotificationType.GALLERY_POST,
+                message = "게시물을 업로드하였습니다",
+                targetId = GalleryData.getGalleryDataList().size + 1,
+                clicked = false
+            )
+            NotificationData.addNotificationItem(newNotification)
             Log.d("Date", currentDate)
             GalleryData.addGalleryItem(newGalleryItem)
             Log.d("GalleryData", "Current GalleryData: ${GalleryData.getGalleryDataList()}")

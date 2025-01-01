@@ -40,6 +40,6 @@ object NotificationData {
     }
 
     fun addNotificationItem(newMissionItem: NotificationDto) {
-        NotificationDataList.add(newMissionItem)
+        NotificationDataList.add(0, newMissionItem)
     }
 }

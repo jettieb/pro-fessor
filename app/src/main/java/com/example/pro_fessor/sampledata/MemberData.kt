@@ -5,7 +5,7 @@ import com.example.pro_fessor.R
 object MemberData {
     fun getPhoneDataList(): List<MemberDto> {
         return listOf(
-            MemberDto(1, "홍길동", "010-0000-0000", "red_road_dong@gmail.com", 37.5665, 126.9780, R.drawable.profile_1, R.drawable.profile_circle_1, "컴퓨터공학", "인공지능", "January 1st, 1990", "Seoul, Korea"),
+            MemberDto(1, "조성원", "010-0000-0000", "red_road_dong@gmail.com", 37.5665, 126.9780, R.drawable.profile_1, R.drawable.profile_circle_1, "컴퓨터공학", "인공지능", "January 1st, 1990", "Seoul, Korea"),
             MemberDto(2, "김철수", "010-1234-5678", "cheolsoo_kim@gmail.com", 35.1796, 129.0756, R.drawable.profile_2, R.drawable.profile_circle_2,  "기계공학", "로봇공학", "February 2nd, 1992", "Busan, Korea"),
             MemberDto(3, "이영희", "010-9876-5432", "younghee_lee@gmail.com", 37.4563, 126.7052, R.drawable.profile_3, R.drawable.profile_circle_3, "경영학", "마케팅", "March 3rd, 1993", "Incheon, Korea"),
             MemberDto(4, "박지훈", "010-5555-1111", "jihoon_park@gmail.com", 35.1601, 126.8514, R.drawable.profile_4, R.drawable.profile_circle_4, "전기공학", "사물인터넷", "April 4th, 1994", "Gwangju, Korea"),
