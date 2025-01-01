@@ -19,5 +19,7 @@
 
     <!-- Include 하단바 -->
     <include
-        layout="@layout/bottom_bar" />
+        layout="@layout/bottom_bar"
+        android:id="@+id/botbar"
+        android:visibility="visible"/>
 </LinearLayout>
