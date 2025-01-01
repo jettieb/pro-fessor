@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.gallery.PhoneDetailFragment
+import com.example.pro_fessor.map.MapFragment
 import com.example.pro_fessor.phone.ListItem
 import com.example.pro_fessor.phone.PhoneAdapter
 import com.example.pro_fessor.sampledata.CVDto
@@ -64,16 +65,34 @@ class MissionCompleteFragment : Fragment() {
                         }
                     }
                     requireActivity().supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(
+                            R.anim.slide_in_up,
+                            0,
+                            0,
+                            R.anim.slide_out_down
+                        )
                         .replace(R.id.content_frame, fragment)
                         .addToBackStack(null)
                         .commit()
                 },
                 onLocationClick = { id ->
-                    // Handle location click (e.g., open map view)
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse("geo:0,0?q=${id}") // Example location handling
+                    val memberDataList: List<MemberDto> = MemberData.getPhoneDataList()
+                    val member = memberDataList.find { it.memberId == id }
+
+                    if(member != null){
+                        val fragment = MapFragment().apply {
+                            arguments = Bundle().apply {
+                                putDouble("lat", member.lat)
+                                putDouble("lng", member.lng)
+                                putInt("memberId", member.memberId)
+                            }
+                        }
+
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .addToBackStack(null)
+                            .commit()
                     }
-                    startActivity(intent)
                 }
             )
 
