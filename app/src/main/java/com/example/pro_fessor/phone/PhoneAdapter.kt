@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberDto
+import com.example.pro_fessor.sampledata.NotificationData
 
 sealed class ListItem {
     data class Header(val title: String) : ListItem()
@@ -152,6 +153,7 @@ class ContactViewHolder(
         }
         imageView.setImageResource(member.imgPath)
         // View 초기화
+
 
         frameView.setBackgroundResource(R.color.background)
         cardView.setCardBackgroundColor(cardView.context.getColor(R.color.background)) // 기본 색상

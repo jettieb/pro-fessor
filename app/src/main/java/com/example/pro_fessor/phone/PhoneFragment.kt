@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ import com.example.pro_fessor.sampledata.CVDto
 import com.example.pro_fessor.sampledata.MemberData
 import com.example.pro_fessor.sampledata.MemberDto
 import com.example.pro_fessor.phone.PhoneAdapter
-
+import com.example.pro_fessor.sampledata.NotificationData
 
 
 @Suppress("DEPRECATION")
@@ -39,6 +40,8 @@ class PhoneFragment : Fragment() {
         // 섹션화된 데이터 준비
 
         val sectionedList = prepareSectionedList(memberDataList, cvDataList)
+        val notificationNumber = view.findViewById<TextView>(R.id.notificationNumber)
+        notificationNumber.text = NotificationData.getCheckdNotificationDataList().toString()
 
         val searchButton = view.findViewById<ImageView>(R.id.top_bar_search)
         searchButton.setOnClickListener {
@@ -84,6 +87,7 @@ class PhoneFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
 
         // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(activity)  // 아이템 세로로 나열

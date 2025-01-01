@@ -31,6 +31,14 @@ object NotificationData {
         return NotificationDataList
     }
 
+    fun getCheckdNotificationDataList(): Int {
+        var cnt: Int = 0
+        for (l in NotificationDataList) {
+            if (l.clicked == false) cnt += 1
+        }
+        return cnt
+    }
+
     fun addNotificationItem(newMissionItem: NotificationDto) {
         NotificationDataList.add(newMissionItem)
     }
