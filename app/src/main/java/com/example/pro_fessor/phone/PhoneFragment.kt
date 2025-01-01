@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pro_fessor.R
 import com.example.pro_fessor.map.MapFragment
+import com.example.pro_fessor.mypage.MypageFragment
 import com.example.pro_fessor.notification.NotificationFragment
 import com.example.pro_fessor.phone.ListItem
 import com.example.pro_fessor.sampledata.CVDto
@@ -65,6 +66,21 @@ class PhoneFragment : Fragment() {
                     R.anim.phone_slide_out_right
                 )
                 .replace(R.id.content_frame, NotificationFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        val mypageButton = view.findViewById<ImageView>(R.id.top_bar_person)
+        mypageButton.setOnClickListener {
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.phone_slide_in_right, // 새로운 Fragment가 오른쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_left, // 기존 Fragment가 왼쪽으로 밀리는 애니메이션
+                    R.anim.phone_slide_in_left,  // 뒤로가기 시 기존 Fragment가 왼쪽에서 들어오는 애니메이션
+                    R.anim.phone_slide_out_right
+                )
+                .replace(R.id.content_frame, MypageFragment())
                 .addToBackStack(null)
                 .commit()
         }
